@@ -1,16 +1,13 @@
 /**
- * FORM SETTINGS — same setup as the Forcefield leads landing pages.
+ * FORM SETTINGS
  * ------------------------------------------------------------------
- * Both forms on the Get Started page (sign-up and general enquiry) are emailed
- * to `formEmail` by FormSubmit (formsubmit.co), in the background.
+ * Both forms on the Get Started page post to /api/contact (a Cloudflare Pages
+ * Function in functions/api/contact.js). It saves each enquiry in Cloudflare D1
+ * and emails support@forcefield.design through Resend. Server settings
+ * (RESEND_API_KEY, EMAIL_TO, ...) live in Cloudflare, never here: see
+ * docs/BACKEND-SETUP.md.
  *
- * FIRST USE: the first submission triggers an activation email to `formEmail`.
- * Click the link in it once; every submission after that arrives normally.
- * Until then visitors see a message that their details weren't sent, with the
- * WhatsApp / email fallback below.
- *
- * To use your own backend instead, set VITE_SIGNUP_ENDPOINT / VITE_ENQUIRY_ENDPOINT
- * (they take priority over FormSubmit).
+ * If sending fails, visitors see the WhatsApp / email fallback below.
  */
 export const FORMS = {
   formEmail: 'support@forcefield.design',
@@ -20,8 +17,8 @@ export const FORMS = {
 }
 
 /**
- * FormSubmit accepts about 10 MB of attachments per submission in total
- * (5 MB until early 2026). Keep the form's limit at or below that.
+ * Attachments travel in the notification email. Resend accepts up to 40 MB per
+ * email after encoding; /api/contact allows 10 MB in total. Keep these in step.
  */
 export const UPLOAD_LIMITS = {
   maxFiles: 5,

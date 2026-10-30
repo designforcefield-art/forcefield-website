@@ -1,4 +1,4 @@
-import { DETAIL_SEP } from '../lib/formsubmit'
+import { newIdempotencyKey } from '../lib/contactApi'
 import { AlertCircle, Check, CheckCircle2, FileText, Loader2, RotateCcw, Upload, X } from 'lucide-react'
 import { useToast } from '../components/ui/Toast'
 import { useEffect, useId, useMemo, useRef, useState, type DragEvent, type FormEvent } from 'react'
@@ -161,6 +161,8 @@ function GetStartedForm({ initialService, fromMyPick }: { initialService: string
   const [tried, setTried] = useState(false)
   const [phase, setPhase] = useState<'form' | 'sending' | 'done'>('form')
   const [result, setResult] = useState<{ reference: string } | null>(null)
+  // Same key for retries of this submission; a fresh one after success or Clear All.
+  const submissionKey = useRef(newIdempotencyKey())
   const [serverError, setServerError] = useState<string | null>(null)
   const [showFallback, setShowFallback] = useState(false)
 
@@ -190,7 +192,7 @@ function GetStartedForm({ initialService, fromMyPick }: { initialService: string
     }
     setPhase('sending')
     setShowFallback(false)
-    const r = await submitSignUp(buildSignUpPayload(f, serviceSource, files, picks, spam.meta()), files)
+    const r = await submitSignUp(buildSignUpPayload(f, serviceSource, files, picks, spam.meta()), files, submissionKey.current)
     if (!r.ok) {
       setServerError(r.error)
       setShowFallback(r.showFallback)
@@ -199,6 +201,7 @@ function GetStartedForm({ initialService, fromMyPick }: { initialService: string
       return
     }
     clearDraft()
+    submissionKey.current = newIdempotencyKey()
     setResult({ reference: r.reference })
     setPhase('done')
   }
@@ -207,6 +210,7 @@ function GetStartedForm({ initialService, fromMyPick }: { initialService: string
   /** Clear every field (files, link, brief, service, consent, spam check), with Undo. */
   const clearAll = () => {
     const snapshot = { f, files, serviceSource }
+    submissionKey.current = newIdempotencyKey()
     setF(EMPTY_SIGNUP)
     setServiceSource('')
     setFiles([])
@@ -598,10 +602,12 @@ function EnquiryForm() {
   const [phase, setPhase] = useState<'form' | 'sending' | 'done'>('form')
   const [serverError, setServerError] = useState<string | null>(null)
   const [showFallback, setShowFallback] = useState(false)
+  const submissionKey = useRef(newIdempotencyKey())
 
   const toast = useToast()
   const clearAll = () => {
     const snapshot = v
+    submissionKey.current = newIdempotencyKey()
     setV(EMPTY_ENQUIRY)
     setErrors({})
     setTried(false)
@@ -637,7 +643,7 @@ function EnquiryForm() {
     setServerError(null)
     setPhase('sending')
     setShowFallback(false)
-    const r = await submitContactEnquiry({ ...v, spamCheck: spam.meta() })
+    const r = await submitContactEnquiry({ ...v, spamCheck: spam.meta() }, submissionKey.current)
     if (!r.ok) {
       setServerError(r.error)
       setShowFallback(r.showFallback)
@@ -645,6 +651,7 @@ function EnquiryForm() {
       spam.regenerate()
       return
     }
+    submissionKey.current = newIdempotencyKey()
     setPhase('done')
   }
 
@@ -712,8 +719,7 @@ function pickFormFields(d: Partial<SignUpDraft>): Partial<SignUpForm> {
 }
 
 /** Send error, with the WhatsApp / email fallback used on the leads pages. */
-function SendError({ message: full, fallback }: { message: string; fallback: boolean }) {
-  const [message, detail] = full.split(DETAIL_SEP)
+function SendError({ message, fallback }: { message: string; fallback: boolean }) {
   return (
     <div role="alert" className="flex items-start gap-3 rounded-xl border border-danger/40 bg-danger/10 px-4 py-3 text-sm">
       <AlertCircle className="mt-0.5 size-4 shrink-0 text-danger" aria-hidden="true" />
@@ -732,7 +738,6 @@ function SendError({ message: full, fallback }: { message: string; fallback: boo
             .
           </p>
         )}
-        {detail && <p className="text-xs break-words text-subtle">Details: {detail}</p>}
       </div>
     </div>
   )

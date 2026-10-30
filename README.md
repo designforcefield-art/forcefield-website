@@ -158,3 +158,9 @@ One-time setup in the Cloudflare dashboard:
 
 Until this is done, the site works normally and tracking is silently skipped.
 No names, emails, IP addresses or cookies are stored; visits are counted with a random id per browser tab.
+
+## Enquiry forms, email and Admin (Cloudflare + Resend)
+
+Both forms post to `/api/contact` (`functions/api/contact.js`), which saves the enquiry in D1 and
+emails support@forcefield.design through Resend. The Admin page (`/admin`) has an **Enquiries** tab
+and the **All solution stats** tab. Full setup, DNS and testing steps: **docs/BACKEND-SETUP.md**.

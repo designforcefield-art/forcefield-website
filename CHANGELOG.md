@@ -4,6 +4,7 @@ Each build matches the version number in the published prototype's history.
 
 | Build | Date | Summary |
 |---|---|---|
+| 80 | 2026-10-30 | Backend: FormSubmit replaced by a Cloudflare Pages Function (POST /api/contact) that validates, rate-limits, prevents duplicates, saves enquiries in D1 and emails support@forcefield.design via Resend (reply-to the customer, attachments included). Admin: server-checked login with signed 12-hour sessions and lockout after 5 failed tries; new Enquiries tab (filters, search, details, status updates, resend failed notifications). /api/stats now needs the admin session. D1 migrations, setup and DNS guide in docs/BACKEND-SETUP.md. |
 | 79 | 2026-10-30 | Sentence case: homepage heading "Digital solutions for every stage of business." (share image updated to match); Admin heading "All solution stats". |
 | 78 | 2026-10-30 | Admin sign-in screen: centred card with "Welcome Admin", short line, Password field (focused on load) and full-width Login button. |
 | 77 | 2026-10-30 | All Solutions tracking: anonymous events for industry, goal, category, search and Add/Remove My Pick (cards and drawer) sent to a Cloudflare Pages Function with D1 storage. New /admin page (password-protected, noindex) with totals, daily chart, top solutions (CSV export), industries, goals, categories and searches, filterable by period and industry. Footer "Admin" link. Toast wording "Essential Solution". |

@@ -1,0 +1,16 @@
+# EXAMPLE ONLY: for running the site and its functions locally with Wrangler,
+# or for applying D1 migrations from the command line.
+#
+# Do NOT rename this to wrangler.toml in the repository unless you intend to
+# manage Cloudflare settings from this file. When a wrangler.toml is present,
+# Cloudflare Pages takes bindings from it and the dashboard settings become
+# read-only. Leaving it as .example keeps the dashboard in charge.
+name = "forcefield-website"
+pages_build_output_dir = "dist"
+compatibility_date = "2025-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "forcefield-db"
+database_id = "PASTE-YOUR-D1-DATABASE-ID"
+migrations_dir = "migrations"

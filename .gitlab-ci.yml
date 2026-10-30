@@ -1,0 +1,25 @@
+# GitLab Pages deployment for the Forcefield website.
+# Every push to the default branch builds the site and publishes dist/.
+# The site will be at https://<your-group>.gitlab.io/<project-name>/
+# (or your custom domain, set under Deploy > Pages).
+
+image: node:22-alpine
+
+cache:
+  key:
+    files: [package-lock.json]
+  paths: [.npm/]
+
+pages:
+  stage: deploy
+  script:
+    - npm ci --cache .npm --prefer-offline
+    # GitLab Pages has no catch-all rewrite for single-page apps, so use /#/ URLs here.
+    # (Cloudflare Pages uses clean URLs, which search engines index; prefer it for SEO.)
+    - VITE_ROUTER=hash npm run build
+  pages:
+    publish: dist
+  artifacts:
+    paths: [dist]
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

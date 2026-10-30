@@ -1,0 +1,9 @@
+# Copy to .dev.vars for local testing with `wrangler pages dev dist`.
+# .dev.vars is git-ignored. Never commit real keys.
+ADMIN_PASSWORD=choose-a-long-password
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxx
+# Optional
+# EMAIL_TO=support@forcefield.design
+# EMAIL_FROM=Forcefield Design <notifications@forcefield.design>
+# IP_HASH_SALT=any-random-string
+# SESSION_SECRET=another-random-string

@@ -56,7 +56,7 @@ export function useSpamCheck() {
     reset,
     tooFast,
     isBot,
-    meta: () => ({ honeypot, elapsedMs: Date.now() - startedAt.current }),
+    meta: () => ({ honeypot, elapsedMs: Date.now() - startedAt.current, a: sum.a, b: sum.b, answer: Number(answer.trim()) }),
   }
 }
 

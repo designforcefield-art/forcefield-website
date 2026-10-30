@@ -1,18 +1,11 @@
 // GET /api/stats?days=30&industry=fnb : aggregated stats for the Admin page.
-// Protected by the ADMIN_PASSWORD environment variable (sent as a Bearer token).
+// Requires an admin session from /api/admin/login (ADMIN_PASSWORD checked on the server).
 import { ensureSchema, json } from './_db.js'
-
-function sameSecret(a, b) {
-  if (typeof a !== 'string' || typeof b !== 'string' || a.length !== b.length) return false
-  let diff = 0
-  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i)
-  return diff === 0
-}
+import { requireAdmin } from './_lib.js'
 
 export async function onRequestGet({ request, env }) {
-  if (!env.ADMIN_PASSWORD) return json({ error: 'ADMIN_PASSWORD is not set in Cloudflare.' }, 503)
-  const token = (request.headers.get('Authorization') || '').replace(/^Bearer\s+/i, '')
-  if (!sameSecret(token, env.ADMIN_PASSWORD)) return json({ error: 'Wrong password.' }, 401)
+  const denied = await requireAdmin(request, env)
+  if (denied) return denied
   if (!env.DB) return json({ error: 'The analytics database (D1 binding "DB") is not connected.' }, 503)
 
   const url = new URL(request.url)

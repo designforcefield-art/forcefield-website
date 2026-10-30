@@ -1,12 +1,12 @@
 /**
- * GENERAL ENQUIRY SUBMISSION ADAPTER
+ * GENERAL ENQUIRY SUBMISSION
  * ------------------------------------------------------------------
- * The General Enquiry tab calls `submitContactEnquiry()`. It emails
- * support@forcefield.design via FormSubmit (src/config/forms.ts).
+ * The General Enquiry tab calls `submitContactEnquiry()`, which posts to
+ * /api/contact (saved in D1, emailed to support@forcefield.design via Resend).
  * Sign-ups (Get Started tab) use lib/signup.ts.
  */
 
-import { sendErrorMessage, sendViaFormSubmit } from './formsubmit'
+import { postContact } from './contactApi'
 
 export const CONSENT_TEXT =
   'I agree that Forcefield Design may use these details to respond to my quotation request. My information will not be shared with third parties for marketing.'
@@ -21,34 +21,24 @@ export interface ContactEnquiry {
   message: string
   consent: boolean
   /** Bot signals for the server (honeypot value and time on form). */
-  spamCheck?: { honeypot: string; elapsedMs: number }
+  spamCheck?: { honeypot: string; elapsedMs: number; a: number; b: number; answer: number }
 }
 
-const ENQUIRY_ENDPOINT = import.meta.env.VITE_ENQUIRY_ENDPOINT as string | undefined
+export const ENQUIRY_CONSENT_TEXT = 'I agree that Forcefield Design may use these details to reply to my enquiry.'
 
-/** Emailed to support@forcefield.design via FormSubmit (like the leads pages), unless VITE_ENQUIRY_ENDPOINT is set. */
-export async function submitContactEnquiry(e: ContactEnquiry): Promise<SubmitResult> {
-  if (ENQUIRY_ENDPOINT) {
-    try {
-      const res = await fetch(ENQUIRY_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...e, submittedAt: new Date().toISOString() }) })
-      return res.ok ? { ok: true } : { ok: false, error: `The server responded with ${res.status}. Please try again.`, showFallback: true }
-    } catch {
-      return { ok: false, error: "We couldn't reach the server. Check your connection and try again.", showFallback: true }
-    }
-  }
-  const r = await sendViaFormSubmit({
-    Form: 'General enquiry',
-    Name: e.name.trim(),
-    Email: e.email.trim(),
-    'Contact number': e.phone.trim() || '-',
-    'Enquiry type': e.type,
-    Message: e.message.trim(),
-    Consent: 'Agreed: Forcefield Design may use these details to reply to this enquiry.',
-    'Sent from': typeof location !== 'undefined' ? location.href : '-',
-    'Submitted at': new Date().toISOString(),
-    _subject: `New enquiry: ${e.type} (${e.name.trim()})`,
-    _replyto: e.email.trim(),
-    _honey: e.spamCheck?.honeypot ?? '',
+export async function submitContactEnquiry(e: ContactEnquiry, idempotencyKey: string): Promise<SubmitResult> {
+  const r = await postContact({
+    form: 'general',
+    idempotencyKey,
+    name: e.name.trim(),
+    email: e.email.trim(),
+    phone: e.phone.trim(),
+    enquiryType: e.type,
+    message: e.message.trim(),
+    consent: e.consent,
+    consentText: ENQUIRY_CONSENT_TEXT,
+    page: typeof location !== 'undefined' ? location.pathname : '',
+    spamCheck: e.spamCheck,
   })
-  return r.ok ? { ok: true } : { ok: false, error: sendErrorMessage(r), showFallback: true }
+  return r.ok ? { ok: true } : { ok: false, error: r.error, showFallback: r.showFallback }
 }

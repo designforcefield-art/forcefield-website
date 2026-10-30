@@ -12,7 +12,7 @@
  */
 import { CONSENT_TEXT } from './quote'
 import { FORMS, UPLOAD_LIMITS } from '../config/forms'
-import { sendErrorMessage, sendViaFormSubmit } from './formsubmit'
+import { postContact } from './contactApi'
 import type { PickItem } from './picks'
 import { DISCOVERY_SERVICES, solutionById } from '../data/catalogue'
 import { digitalSolutionById, recommendPackage } from '../data/solutionsCatalogue'
@@ -251,7 +251,7 @@ export interface SignUpPayload {
   myPick: { type: string; id: string; name: string; detail?: string }[]
   consent: { given: boolean; text: string; at: string }
   /** Bot signals for the server (same approach as the leads pages). */
-  spamCheck: { honeypot: string; elapsedMs: number }
+  spamCheck: { honeypot: string; elapsedMs: number; a: number; b: number; answer: number }
 }
 
 export function buildSignUpPayload(
@@ -295,9 +295,7 @@ export const SIGNUP_CONSENT_TEXT = CONSENT_TEXT.replace('my quotation request', 
 
 export type SignUpResult = { ok: true; reference: string } | { ok: false; error: string; showFallback: boolean }
 
-const ENDPOINT = import.meta.env.VITE_SIGNUP_ENDPOINT as string | undefined
-
-/** Soft client-side throttle (FormSubmit / your backend do the real limiting). */
+/** Soft client-side throttle (the server does the real rate limiting). */
 let lastSubmit = 0
 const MIN_GAP_MS = 15_000
 
@@ -309,65 +307,38 @@ const SOURCE_TEXT: Record<ServiceSource, string> = {
   '': '-',
 }
 
-/** Readable email fields for FormSubmit's table template. */
-function emailFields(p: SignUpPayload): Record<string, string> {
-  const rec = p.recommendedPackage
-  const otherPicks = p.myPick.filter((x) => x.type !== 'solution')
-  return {
-    Form: 'Get Started (sign-up)',
-    'Full name': p.fullName,
-    'Company / business name': p.companyName,
-    Email: p.businessEmail,
-    'Contact number': p.contactNumber,
-    'Service chosen': SERVICE_NAME[p.service],
-    'How the service was chosen': SOURCE_TEXT[p.serviceSource],
-    'Recommended solution (My Pick)': rec ? (rec.tier ? SERVICE_NAME[rec.tier] : 'Pending review') : '-',
-    'Selected solutions': p.selectedSolutions.map((s) => s.name).join(', ') || '-',
-    'Other My Pick items': otherPicks.map((x) => (x.detail ? `${x.name} (${x.detail})` : x.name)).join('; ') || '-',
-    'Business brief': p.businessBrief || '-',
-    'Shared link (not opened by the site)': p.sharedLink || '-',
-    'Uploaded files': p.files.map((f) => `${f.name} (${formatBytes(f.size)})`).join(', ') || '-',
-    Consent: `Agreed at ${p.consent.at}: ${p.consent.text}`,
-    'Sent from': typeof location !== 'undefined' ? location.href : '-',
-    'Submitted at': p.submittedAt,
-    // Structured copy for importing into a CRM later.
-    'Data (JSON)': JSON.stringify({
-      service: p.service,
-      serviceSource: p.serviceSource,
-      recommendedPackage: p.recommendedPackage,
-      selectedSolutions: p.selectedSolutions,
-    }),
-    _subject: `New sign-up: ${p.companyName} (${SERVICE_NAME[p.service]})`,
-    _replyto: p.businessEmail,
-    _honey: p.spamCheck.honeypot,
-  }
-}
-
-export async function submitSignUp(payload: SignUpPayload, files: File[]): Promise<SignUpResult> {
+export async function submitSignUp(payload: SignUpPayload, files: File[], idempotencyKey: string): Promise<SignUpResult> {
   const now = Date.now()
   if (now - lastSubmit < MIN_GAP_MS) return { ok: false, error: 'Please wait a few seconds before sending again.', showFallback: false }
   lastSubmit = now
-  const reference = `FF-${now.toString(36).toUpperCase().slice(-6)}`
-
-  if (ENDPOINT) {
-    try {
-      const body = new FormData()
-      body.append('payload', JSON.stringify(payload))
-      files.forEach((f) => body.append('files', f, f.name))
-      const res = await fetch(ENDPOINT, { method: 'POST', body })
-      if (res.status === 429) return { ok: false, error: 'Too many attempts. Please try again in a minute.', showFallback: false }
-      if (!res.ok) return { ok: false, error: `The server responded with ${res.status}. Please try again.`, showFallback: true }
-      const data = (await res.json().catch(() => ({}))) as { reference?: string }
-      return { ok: true, reference: data.reference ?? reference }
-    } catch {
-      return { ok: false, error: "We couldn't reach the server. Check your connection and try again.", showFallback: true }
-    }
-  }
-
-  const r = await sendViaFormSubmit({ ...emailFields(payload), Reference: reference }, files)
-  if (r.ok) return { ok: true, reference }
+  const rec = payload.recommendedPackage
+  const r = await postContact(
+    {
+      form: 'get-started',
+      idempotencyKey,
+      name: payload.fullName,
+      company: payload.companyName,
+      email: payload.businessEmail,
+      phone: payload.contactNumber,
+      service: payload.service,
+      message: payload.businessBrief,
+      link: payload.sharedLink,
+      consent: payload.consent.given,
+      consentText: payload.consent.text,
+      page: typeof location !== 'undefined' ? location.pathname : '',
+      spamCheck: payload.spamCheck,
+      details: {
+        serviceSource: SOURCE_TEXT[payload.serviceSource],
+        recommendation: rec ? (rec.tier ? `${SERVICE_NAME[rec.tier]} Solution` : 'Pending review') : '',
+        selectedSolutions: payload.selectedSolutions,
+        otherPicks: payload.myPick.filter((x) => x.type !== 'solution').map((x) => (x.detail ? `${x.name} (${x.detail})` : x.name)),
+      },
+    },
+    files,
+  )
+  if (r.ok) return { ok: true, reference: r.reference }
   lastSubmit = 0 // let them retry straight away
-  return { ok: false, error: sendErrorMessage(r), showFallback: true }
+  return { ok: false, error: r.error, showFallback: r.showFallback }
 }
 
 export const FALLBACK = { whatsapp: FORMS.whatsappNumber, email: FORMS.contactEmail }
