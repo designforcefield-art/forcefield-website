@@ -2,6 +2,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { Layout } from './components/site/Layout'
 import { ToastProvider } from './components/ui/Toast'
 import About from './pages/About'
+import Admin from './pages/Admin'
 import GetStarted from './pages/GetStarted'
 import Discovery from './pages/Discovery'
 import Home from './pages/Home'
@@ -29,6 +30,7 @@ export default function App() {
               <Route path="discovery" element={<Discovery />} />
               <Route path="contact" element={<GetStartedRoute />} />
               <Route path="get-started" element={<GetStartedRoute />} />
+              <Route path="admin" element={<Admin />} />
               <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>

@@ -1,5 +1,6 @@
 import { RotateCcw, Search, SearchX, X } from 'lucide-react'
-import { useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { setTrackContext, track } from '../lib/track'
 import { useSearchParams } from 'react-router-dom'
 import { ToolCard } from '../components/ToolCard'
 import { Input } from '../components/ui/Field'
@@ -32,6 +33,22 @@ export default function Solutions() {
     const q = params.get('industry')
     return INDUSTRY_OPTIONS.some((o) => o.id === q) ? (q as IndustryId) : null
   })
+  // Usage tracking: current filters travel with every event; search terms are sent once typing pauses.
+  useEffect(() => {
+    setTrackContext({ industry, goal, category: category === 'all' ? null : category })
+  }, [industry, goal, category])
+  useEffect(() => () => setTrackContext({ industry: null, goal: null, category: null }), [])
+  const lastSearch = useRef('')
+  useEffect(() => {
+    const term = query.trim().toLowerCase()
+    if (term.length < 2 || term === lastSearch.current) return
+    const t = window.setTimeout(() => {
+      lastSearch.current = term
+      track('search', term)
+    }, 1200)
+    return () => window.clearTimeout(t)
+  }, [query])
+
   const catalogueRef = useRef<HTMLElement>(null)
   const goalsRef = useRef<HTMLElement>(null)
 
@@ -50,12 +67,14 @@ export default function Solutions() {
   const chooseIndustry = (id: IndustryId) => {
     const next = industry === id ? null : id
     setIndustry(next)
+    if (next) track('industry', next)
     if (next) requestAnimationFrame(() => scrollTo(goalsRef.current))
   }
 
   const chooseGoal = (id: BusinessGoalId) => {
     const next = goal === id ? null : id
     setGoal(next)
+    if (next) track('goal', next)
     if (next) requestAnimationFrame(scrollToCatalogue)
   }
 
@@ -190,7 +209,10 @@ export default function Solutions() {
                   key={c.id}
                   type="button"
                   aria-pressed={category === c.id}
-                  onClick={() => setCategory(c.id)}
+                  onClick={() => {
+                    setCategory(c.id)
+                    if (c.id !== 'all') track('category', c.id)
+                  }}
                   className={cn(
                     'h-9 shrink-0 rounded-full px-4 text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-2 focus-visible:ring-electric/60',
                     category === c.id

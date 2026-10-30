@@ -1,0 +1,53 @@
+{
+  "siteUrl": "https://www.forcefield.design",
+  "siteName": "Forcefield Design",
+  "ogImage": "/og-image.png",
+  "pages": [
+    {
+      "path": "/",
+      "label": "Home",
+      "title": "Digital Solutions for Singapore Businesses | Forcefield Design",
+      "description": "Professional websites, online booking, WhatsApp and e-commerce tools for Singapore SMEs, startups and home-based businesses. Set up and managed for you.",
+      "priority": "1.0"
+    },
+    {
+      "path": "/solutions",
+      "label": "Solutions",
+      "title": "Digital Tools for Singapore Businesses | Forcefield Design",
+      "description": "Browse 86 ready-to-deploy digital solutions, from online booking and e-commerce to WhatsApp chat and SEO, for F&B, beauty, retail and service businesses in Singapore.",
+      "priority": "0.9"
+    },
+    {
+      "path": "/industries",
+      "label": "Industries",
+      "title": "Website Solutions by Industry in Singapore | Forcefield Design",
+      "description": "Ready-made website solutions for F&B, beauty & wellness, retail, interior design, property, education and professional services in Singapore, with live demos.",
+      "priority": "0.9"
+    },
+    {
+      "path": "/discovery",
+      "label": "Discovery",
+      "title": "Discovery Consultation in Singapore | Forcefield Design",
+      "description": "Not sure what your business needs online? Our Discovery workshops map your challenges and recommend the right digital solutions for your SME or startup.",
+      "priority": "0.8"
+    },
+    {
+      "path": "/about",
+      "label": "About",
+      "title": "About Forcefield Design | Singapore Digital Solutions Partner",
+      "description": "Forcefield Design started as a Singapore design studio. Today we help SMEs, startups and home-based businesses get online and grow with practical digital solutions.",
+      "priority": "0.6"
+    },
+    {
+      "path": "/get-started",
+      "label": "Get Started",
+      "title": "Get Started or Contact Us | Forcefield Design Singapore",
+      "description": "Tell us about your business and we'll set up the right website and tools. Reach Forcefield Design in Singapore by form, WhatsApp or email.",
+      "priority": "0.8"
+    }
+  ],
+  "noindex": {
+    "title": "Page not found | Forcefield Design",
+    "description": "This page isn't available. Explore digital solutions for Singapore businesses at Forcefield Design."
+  }
+}

@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom'
  * another, as the section comes into view. Runs on every page change.
  * Skipped entirely for visitors who prefer reduced motion.
  */
-const STEP_MS = 108
+const STEP_MS = 130
 const MAX_STEPS = 6
 
 /** Walks down single-child wrappers (section → container → …) to the blocks worth staggering. */
@@ -46,7 +46,7 @@ export function RevealManager() {
     const show = (s: Element) =>
       blocksOf(s).forEach((b, i) => {
         b.classList.add('is-in')
-        if (b instanceof HTMLElement) timers.push(window.setTimeout(() => cleanup(b), Math.min(i, MAX_STEPS) * STEP_MS + 1600))
+        if (b instanceof HTMLElement) timers.push(window.setTimeout(() => cleanup(b), Math.min(i, MAX_STEPS) * STEP_MS + 2000))
       })
     const io = new IntersectionObserver(
       (entries) =>

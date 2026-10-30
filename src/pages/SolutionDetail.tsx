@@ -107,7 +107,7 @@ export default function SolutionDetail() {
 
       <section className="py-section" aria-labelledby="compare-title">
         <Container className="flex flex-col gap-10">
-          <SectionHeading eyebrow="Packages" title={<span id="compare-title">Compare packages</span>} lead="Same solution, two levels. Choose here or in the box above." />
+          <SectionHeading eyebrow="Essential vs Dynamic" title={<span id="compare-title">Compare solutions</span>} lead="Same solution, two levels. Choose here or in the box above." />
           <PackageComparison solution={solution} selected={pkg} onSelect={(p) => { setPkg(p); window.scrollTo({ top: 0, behavior: 'smooth' }) }} highlightFeatures={features} />
         </Container>
       </section>

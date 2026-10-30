@@ -156,8 +156,9 @@ function Timeline() {
       >
         <div key={stage.id} className="grid min-h-[15rem] animate-fade-in gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-12">
           <div className="flex flex-col gap-4">
-            <p className="text-sm font-medium text-cyan">
-              {stage.num} — {stage.name}
+            <p className="flex gap-2.5 text-sm font-medium text-cyan">
+              <span className="tabular-nums opacity-70">{stage.num}</span>
+              <span>{stage.name}</span>
             </p>
             <h3 className="text-statement font-normal">{stage.heading}</h3>
             <p className="max-w-[56ch] text-body-lg text-muted">{stage.description}</p>

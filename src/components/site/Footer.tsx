@@ -50,7 +50,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
   {
     title: 'Company',
     links: [
-      { to: '/about', label: 'About Forcefield' },
+      { to: '/about', label: 'About Forcefield Design' },
       { to: '/get-started', label: 'Get Started' },
       { to: '/contact', label: 'Contact Us' },
     ],
@@ -64,7 +64,7 @@ export function Footer() {
         <div className="flex flex-col gap-4 sm:col-span-2 lg:col-span-1">
           <Logo />
           <p className="max-w-[40ch] text-sm text-muted">
-            We create solutions that help businesses build an online presence, attract customers, and generate leads. Start simple and scale as your business grows.
+            We make going digital simple with professional websites, smart business tools, and dedicated support. From getting started to scaling up, we provide the right solutions to help your business grow.
           </p>
           <SocialLinks />
         </div>
@@ -76,6 +76,10 @@ export function Footer() {
       <Container data-build={BUILD} className="border-t border-line py-6 text-xs text-subtle">
         <p>
           © {new Date().getFullYear()} {SITE.legalName} (UEN {SITE.uen}). All rights reserved.
+          <span aria-hidden="true" className="mx-2">·</span>
+          <Link to="/admin" rel="nofollow" className="underline-offset-2 hover:text-fg hover:underline">
+            Admin
+          </Link>
         </p>
       </Container>
     </footer>

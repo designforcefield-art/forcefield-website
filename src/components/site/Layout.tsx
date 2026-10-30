@@ -5,6 +5,7 @@ import { Footer } from './Footer'
 import { Header } from './Header'
 import { RevealManager } from './Reveal'
 import { WhatsAppFloat } from './WhatsAppFloat'
+import { Seo } from '../../seo/Seo'
 
 function ScrollManager() {
   const { pathname, hash } = useLocation()
@@ -25,6 +26,7 @@ export function Layout() {
   return (
     <>
       <ScrollManager />
+      <Seo />
       <RevealManager />
       <Header />
       <main id="main" className="relative">

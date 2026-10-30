@@ -1,19 +1,27 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { HashRouter, MemoryRouter } from 'react-router-dom'
+import { BrowserRouter, HashRouter, MemoryRouter } from 'react-router-dom'
 import App from './App'
 import './styles.css'
 
 /**
- * HashRouter works on any static host with no server config.
- * Swap to BrowserRouter once the host rewrites unknown paths to index.html.
- * The single-file preview build uses MemoryRouter (VITE_ROUTER=memory).
+ * Routers:
+ *  - default: BrowserRouter, clean URLs (/about) that search engines index.
+ *    Needs a host that serves index.html for unknown paths (Cloudflare Pages does).
+ *  - VITE_ROUTER=hash: /#/about URLs, for hosts with no rewrite support.
+ *  - VITE_ROUTER=memory: the single-file preview build.
  */
-const Router = import.meta.env.VITE_ROUTER === 'memory' ? MemoryRouter : HashRouter
+const mode = import.meta.env.VITE_ROUTER
+const Router = mode === 'memory' ? MemoryRouter : mode === 'hash' ? HashRouter : BrowserRouter
+
+// Old links like /#/about (from the earlier hash URLs) move to /about.
+if (mode !== 'memory' && mode !== 'hash' && window.location.hash.startsWith('#/')) {
+  window.history.replaceState(null, '', window.location.hash.slice(1))
+}
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Router>
+    <Router basename={mode === 'memory' ? undefined : import.meta.env.BASE_URL.replace(/\/$/, '') || undefined}>
       <App />
     </Router>
   </StrictMode>,

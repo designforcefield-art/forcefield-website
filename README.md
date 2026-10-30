@@ -21,7 +21,7 @@ No backend, accounts or paid APIs are required. Picks are stored in `localStorag
 ```
 src/
   styles.css              Design tokens (@theme) + utilities
-  main.tsx                Router choice (HashRouter / MemoryRouter)
+  main.tsx                Router choice (BrowserRouter / HashRouter / MemoryRouter)
   App.tsx                 Routes
   data/
     types.ts              Catalogue types (CMS-shaped, ID references only)
@@ -122,7 +122,7 @@ Until an endpoint is configured, nothing is sent anywhere and the UI says so.
 
 - Confirm contact email/phone, real price bands and theme previews (current previews are drawn wireframes).
 - Past work names and three testimonials on About are taken from the current forcefield.design site. Confirm clients are happy for them to carry over.
-- Swap `HashRouter` for `BrowserRouter` once hosting rewrites unknown paths to `index.html`.
+- Clean URLs (`/about`) via BrowserRouter. Cloudflare Pages serves them as-is; set `VITE_ROUTER=hash` for hosts without rewrites.
 - No reference image was attached to the brief; visuals follow the written direction (black/electric blue, glow, floating glass cards).
 
 ## Deploying to GitLab Pages
@@ -132,3 +132,29 @@ the default branch runs `npm run build` and publishes `dist/` with GitLab Pages.
 Find the address under **Deploy → Pages** (custom domains can be added there).
 The site uses relative paths and hash URLs (`/#/about`), so it works at
 `https://<group>.gitlab.io/<project>/` without extra configuration.
+
+## SEO
+
+- Page titles, descriptions and keywords live in `src/seo/pages.json`; structured data in `src/seo/structuredData.mjs`.
+- `npm run build` runs `scripts/seo-pages.mjs`, which writes a static HTML file per page with its own
+  title, description, canonical URL, social tags and JSON-LD, plus `sitemap.xml`, `robots.txt` and
+  Cloudflare `_redirects`.
+- The canonical domain is `siteUrl` in `pages.json` (https://www.forcefield.design). Override for a
+  staging build with `SITE_URL=https://… npm run build`.
+- After launch: add the domain in Google Search Console and submit `/sitemap.xml`.
+
+## All Solutions tracking and Admin stats (Cloudflare)
+
+The All Solutions page sends anonymous events (industry, goal, category, search term,
+solution added to / removed from My Pick) to `/api/track`. The footer **Admin** link
+opens `/admin`, which shows the totals after you enter the admin password.
+The code is in `functions/api/` (Cloudflare Pages Functions) and stores data in Cloudflare D1.
+
+One-time setup in the Cloudflare dashboard:
+1. **Storage & Databases → D1 → Create database**, e.g. `forcefield-analytics`. The table is created automatically.
+2. Your Pages project → **Settings → Bindings → Add → D1 database**: variable name `DB`, choose that database.
+3. Same project → **Settings → Variables and Secrets → Add**: `ADMIN_PASSWORD`, type *Secret*, your chosen password.
+4. Redeploy (push a commit or **Deployments → Retry deployment**). Bindings apply to new deployments only.
+
+Until this is done, the site works normally and tracking is silently skipped.
+No names, emails, IP addresses or cookies are stored; visits are counted with a random id per browser tab.

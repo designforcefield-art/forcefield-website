@@ -7,6 +7,7 @@ import { cn, Container } from '../ui/primitives'
 const SOLUTION_LINKS = [
   { to: '/solutions', label: 'All Solutions', desc: 'Explore digital features for your business', icon: LayoutGrid },
   { to: '/industries', label: 'By Industry', desc: 'Discover what works for businesses like yours', icon: Factory },
+  { to: '/discovery', label: 'Discovery Consultation', desc: 'Not sure where to start? We’ll help you find the right solution', icon: Compass },
 ]
 
 /** Forcefield stepped mark. 100×100 box; rounded joins match the supplied logo. */
@@ -46,7 +47,7 @@ export function Header() {
   const [pulse, setPulse] = useState(false)
   const ddRef = useRef<HTMLDivElement>(null)
   const location = useLocation()
-  const solutionsActive = ['/solutions', '/industries'].some((p) => location.pathname.startsWith(p))
+  const solutionsActive = ['/solutions', '/industries', '/discovery'].some((p) => location.pathname.startsWith(p))
 
   useEffect(() => {
     setSolutionsOpen(false)

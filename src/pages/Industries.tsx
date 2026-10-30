@@ -14,13 +14,13 @@ const PREVIEW_COUNT = 4
 
 const PACKAGES: Record<Tier, { name: string; description: string; note: string }> = {
   essential: {
-    name: 'Essential',
+    name: 'Essential Solution',
     description:
       'A professional 3-page website, fully managed by our team. We handle the setup, updates, and maintenance so you can focus on your business.',
     note: 'Pages and features are preset. The layout is fixed; your logo, images and colours can be customised.',
   },
   dynamic: {
-    name: 'Dynamic',
+    name: 'Dynamic Solution',
     description:
       'A flexible website with unlimited pages, an easy-to-use admin panel, AI-powered SEO tools, and dedicated support as your business grows.',
     note: 'Starts with baseline features you can customise. The layout is fixed; your logo, images and colours can be customised.',
@@ -130,7 +130,7 @@ function IndustryCard({ ind, expanded, onToggle }: { ind: Industry; expanded: bo
       <div
         id={regionId}
         role="region"
-        aria-label={`${ind.name}: packages and demos`}
+        aria-label={`${ind.name}: solutions and demos`}
         inert={!expanded}
         className={cn(
           'grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none',
@@ -139,10 +139,10 @@ function IndustryCard({ ind, expanded, onToggle }: { ind: Industry; expanded: bo
       >
         <div className="overflow-hidden">
           <div className="mt-6 flex flex-col gap-4 border-t border-line pt-6">
-            <p className="text-sm font-medium text-fg">Choose your package</p>
+            <p className="text-sm font-medium text-fg">Choose your solution</p>
             <div
               role="group"
-              aria-label={`Package for ${ind.name}`}
+              aria-label={`Solution for ${ind.name}`}
               className="grid grid-cols-2 gap-1 rounded-full bg-canvas p-1 shadow-pressed"
             >
               {(['essential', 'dynamic'] as const).map((t) => (

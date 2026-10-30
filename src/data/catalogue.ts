@@ -595,7 +595,7 @@ export const DISCOVERY_SERVICES: DiscoveryService[] = [
   {
     id: 'solution', name: 'Solution Discovery', icon: 'Route',
     description: 'Turn what you need into a clear plan: which tools to use and what to do first.',
-    outcomes: ['A summary of what you need', 'Recommended solutions and packages', 'A step-by-step plan'],
+    outcomes: ['A summary of what you need', 'Recommended solutions', 'A step-by-step plan'],
   },
 ]
 

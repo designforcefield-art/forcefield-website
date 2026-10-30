@@ -18,7 +18,7 @@ export function PackageToggle({
 }) {
   return (
     <fieldset>
-      <legend className="mb-2 text-sm font-medium">Package</legend>
+      <legend className="mb-2 text-sm font-medium">Solution</legend>
       <div className="grid grid-cols-2 gap-1 rounded-full border border-line bg-canvas p-1 shadow-pressed">
         {(['essential', 'dynamic'] as PackageTier[]).map((p) => (
           <label

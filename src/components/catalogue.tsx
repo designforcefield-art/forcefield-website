@@ -28,9 +28,9 @@ export function StatusBadge({ status }: { status: LineStatus }) {
 /** One plain-language line about where a feature is available. */
 export function availabilitySummary(f: Feature): { text: string; tone: 'success' | 'electric' | 'neutral' } {
   const { essential: e, dynamic: d } = f.availability
-  if (e === 'included') return { text: 'Included in both packages', tone: 'success' }
+  if (e === 'included') return { text: 'Included in Essential and Dynamic Solutions', tone: 'success' }
   if (e === 'addon') return { text: d === 'included' ? 'Optional extra, or included in Dynamic' : 'Optional extra', tone: 'electric' }
-  if (d === 'included') return { text: 'Dynamic package only', tone: 'neutral' }
+  if (d === 'included') return { text: 'Dynamic Solution only', tone: 'neutral' }
   return { text: 'Optional extra in Dynamic', tone: 'neutral' }
 }
 

@@ -1,6 +1,7 @@
 import { Check, Plus } from 'lucide-react'
 import { PACKAGE_INFO } from '../data/catalogue'
 import { recommendPackage, type DigitalSolution } from '../data/solutionsCatalogue'
+import { track } from '../lib/track'
 import { usePicks } from '../state/PickContext'
 import { SolutionArtPanel } from './SolutionArt'
 import { cn } from './ui/primitives'
@@ -12,14 +13,18 @@ export function useToolPick(id: string) {
   const toast = useToast()
   const existing = picks.find((p) => p.kind === 'tool' && p.toolId === id)
   const toggle = () => {
-    if (existing) return remove(existing.id)
+    if (existing) {
+      track('remove', id)
+      return remove(existing.id)
+    }
+    track('add', id)
     add({ kind: 'tool', toolId: id, source: 'solutions-catalogue', answers: null })
     // Recommendation updates automatically from everything now in My Pick.
     const rec = recommendPackage([...picks.flatMap((p) => (p.kind === 'tool' ? [p.toolId] : [])), id])
     if (rec)
       toast({
         title: 'Added to My Pick',
-        body: rec.tier ? `Recommended for you: ${PACKAGE_INFO[rec.tier].name}` : 'Package recommendation pending review',
+        body: rec.tier ? `Recommended for you: ${PACKAGE_INFO[rec.tier].name} Solution` : 'Recommendation pending review',
         action: { label: 'View My Pick', onClick: openDrawer },
       })
   }

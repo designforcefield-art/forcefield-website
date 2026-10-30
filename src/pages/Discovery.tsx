@@ -75,7 +75,7 @@ const PROCESS = [
   },
   {
     title: 'Plan your next steps',
-    body: 'Walk away with clear recommendations and a direction for moving forward. Whether you implement with Forcefield or another provider, the choice is yours.',
+    body: 'Walk away with clear recommendations and a direction for moving forward. Whether you implement with Forcefield Design or another provider, the choice is yours.',
   },
 ]
 
@@ -121,8 +121,9 @@ export default function Discovery() {
               key={e.title}
               className="flex flex-col rounded-panel border border-line bg-surface p-6 sm:p-8 lg:row-span-4 lg:grid lg:grid-rows-subgrid lg:gap-y-0"
             >
-              <p className="text-sm font-medium text-cyan">
-                {num(i)} — {e.title}
+              <p className="flex gap-2.5 text-sm font-medium text-cyan">
+                <span className="tabular-nums opacity-70">{num(i)}</span>
+                <span>{e.title}</span>
               </p>
               <h3 className="mt-4 text-card-title font-normal">{e.heading}</h3>
               <p className="mt-2 text-card-body text-muted">{e.body}</p>
@@ -201,7 +202,7 @@ export default function Discovery() {
             <p>We'll discuss your needs and provide a quotation before any work begins.</p>
             <p className="flex items-start gap-3 rounded-xl border border-line bg-canvas/40 p-4 text-small">
               <PackageGlyph tier="discovery" size="sm" className="size-8" />
-              <span>Discovery is separate from our Essential and Dynamic website packages. This service will be quoted separately.</span>
+              <span>Discovery is separate from our Essential Solution and Dynamic Solution. This service will be quoted separately.</span>
             </p>
             <StartCta className="mt-2" />
           </div>

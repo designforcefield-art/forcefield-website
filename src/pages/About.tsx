@@ -39,7 +39,7 @@ export default function About() {
       <section className="relative -mt-header overflow-hidden pt-header" aria-labelledby="about-title">
         <Container className="flex flex-col gap-12 pt-14 sm:pt-20">
           <div className="flex max-w-4xl flex-col gap-6">
-            <Eyebrow>About Forcefield</Eyebrow>
+            <Eyebrow>About Forcefield Design</Eyebrow>
             <h1 id="about-title" className="text-h1 font-normal">
               Making digital simple <span className="text-gradient">for every business.</span>
             </h1>
@@ -50,7 +50,7 @@ export default function About() {
             </p>
             <div className="flex flex-col gap-4 text-body-lg text-muted">
               <p>
-                With over a decade of experience in design and digital development, we help businesses find the right solutions, get everything set up, and make the most of technology — without the unnecessary hassle.
+                With over a decade of experience in design and digital development, we help businesses find the right solutions, get everything set up, and make the most of technology without the unnecessary hassle.
               </p>
               <p>Whether you're starting out or ready to grow, we're here to make digital work for you.</p>
             </div>
@@ -67,7 +67,7 @@ export default function About() {
           </div>
           {/* lg:pt-11 = label height + gap, so the story starts level with the heading. */}
           <div className="flex max-w-[62ch] flex-col gap-5 text-body-lg text-muted lg:pt-11">
-            <p>Forcefield design began as a creative design studio, building websites, applications, and brand experiences for businesses.</p>
+            <p>Forcefield Design began as a creative design studio, building websites, applications, and brand experiences for businesses.</p>
             <p>
               Over the years, we realised something important: businesses don't always need complicated, custom-built solutions. They need practical tools that solve real problems, work reliably, and grow with them.
             </p>

@@ -24,7 +24,7 @@ function Hero() {
       <Container className="relative flex flex-col items-center gap-14 pt-16 pb-20 text-center sm:pt-24 lg:pb-28">
         <div className="flex flex-col items-center gap-7">
           <h1 className="max-w-5xl text-h1 font-normal">
-            Solution <span className="text-gradient">for every business.</span>
+            Digital solutions <span className="text-gradient">for every stage of business.</span>
           </h1>
           <div className="flex max-w-[40rem] flex-col gap-3">
             <p className="text-lead text-fg">From getting started to scaling up, we make going digital effortless.</p>
@@ -45,7 +45,7 @@ function Hero() {
 const STEPS_SIMPLE: { title: string; body: string }[] = [
   {
     title: 'Tell us about your business',
-    body: "Choose a package and share your business needs. Not sure where to start? We'll guide you.",
+    body: "Choose a solution and share your business needs. Not sure where to start? We'll guide you.",
   },
   {
     title: 'We build & set up',
@@ -91,10 +91,6 @@ function ThreeSteps() {
             </li>
           ))}
         </ol>
-        <div className="flex flex-col items-center gap-5 text-center">
-          <p className="text-lead text-fg">Your business, our expertise. Zero hassle.</p>
-          <ButtonLink to="/get-started" size="lg" className="w-full max-w-xs xs:w-auto">Get Started</ButtonLink>
-        </div>
       </Container>
     </section>
   )

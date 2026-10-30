@@ -183,18 +183,17 @@ const SERVICE_LABEL: Record<ServiceId, string> = { discovery: 'Discovery', essen
  * selected on the form, so the brief never says one package while another is ticked.
  */
 export function packageLine(service: ServiceId | '', tier: Tier | null): string | null {
-  if (!service || service === tier) return tier ? `Recommended package: ${PACKAGE_INFO[tier].name}` : null
-  return tier
-    ? `Selected service: ${SERVICE_LABEL[service]} (recommended package: ${SERVICE_LABEL[tier]})`
-    : `Selected service: ${SERVICE_LABEL[service]}`
+  if (!service || service === tier) return tier ? `Recommended solution: ${PACKAGE_INFO[tier].name} Solution` : null
+  const chosen = service === 'discovery' ? 'Discovery Consultation' : `${SERVICE_LABEL[service]} Solution`
+  return tier ? `Selected service: ${chosen} (recommended: ${SERVICE_LABEL[tier]} Solution)` : `Selected service: ${chosen}`
 }
-const PACKAGE_LINE_RE = /\n+(?:Recommended Package|Recommended package|Selected service): [^\n]*/
+const PACKAGE_LINE_RE = /\n+(?:Recommended [Pp]ackage|Recommended solution|Selected service): [^\n]*/
 
 /** Rewrites the package line in the brief's My Pick section to match the selected service. */
 export function syncBriefPackageLine(brief: string, service: ServiceId | '', tier: Tier | null): string {
   const at = brief.indexOf(BRIEF_MARKER)
   if (at < 0) return brief
-  const m = brief.slice(at).match(/^I'm interested in the following digital solutions for my business:\n(?:\n?- .*)*(?:\n+(?:Recommended Package|Recommended package|Selected service): .*)?/)
+  const m = brief.slice(at).match(/^I'm interested in the following digital solutions for my business:\n(?:\n?- .*)*(?:\n+(?:Recommended [Pp]ackage|Recommended solution|Selected service): .*)?/)
   if (!m) return brief
   const list = m[0].replace(PACKAGE_LINE_RE, '')
   const line = packageLine(service, tier)
@@ -222,7 +221,7 @@ export function mergeMyPickBrief(existing: string, names: string[], tier: Tier |
   const at = existing.indexOf(BRIEF_MARKER)
   if (at >= 0) {
     const rest = existing.slice(at)
-    const m = rest.match(/^I'm interested in the following digital solutions for my business:\n(?:\n?- .*)*(?:\n+(?:Recommended Package|Recommended package|Selected service): .*)?/)
+    const m = rest.match(/^I'm interested in the following digital solutions for my business:\n(?:\n?- .*)*(?:\n+(?:Recommended [Pp]ackage|Recommended solution|Selected service): .*)?/)
     const len = m ? m[0].length : BRIEF_MARKER.length
     return existing.slice(0, at) + myPickBlock(names, line, false) + existing.slice(at + len)
   }
@@ -305,7 +304,7 @@ const MIN_GAP_MS = 15_000
 const SERVICE_NAME: Record<ServiceId, string> = { discovery: 'Discovery', essential: 'Essential', dynamic: 'Dynamic' }
 const SOURCE_TEXT: Record<ServiceSource, string> = {
   manual: 'Chosen by the visitor',
-  explicit: 'From a package link',
+  explicit: 'From a solution link',
   recommended: 'Our My Pick suggestion (kept by the visitor)',
   '': '-',
 }
@@ -322,7 +321,7 @@ function emailFields(p: SignUpPayload): Record<string, string> {
     'Contact number': p.contactNumber,
     'Service chosen': SERVICE_NAME[p.service],
     'How the service was chosen': SOURCE_TEXT[p.serviceSource],
-    'Recommended package (My Pick)': rec ? (rec.tier ? SERVICE_NAME[rec.tier] : 'Pending review') : '-',
+    'Recommended solution (My Pick)': rec ? (rec.tier ? SERVICE_NAME[rec.tier] : 'Pending review') : '-',
     'Selected solutions': p.selectedSolutions.map((s) => s.name).join(', ') || '-',
     'Other My Pick items': otherPicks.map((x) => (x.detail ? `${x.name} (${x.detail})` : x.name)).join('; ') || '-',
     'Business brief': p.businessBrief || '-',

@@ -1,3 +1,4 @@
+import { DETAIL_SEP } from '../lib/formsubmit'
 import { AlertCircle, Check, CheckCircle2, FileText, Loader2, RotateCcw, Upload, X } from 'lucide-react'
 import { useToast } from '../components/ui/Toast'
 import { useEffect, useId, useMemo, useRef, useState, type DragEvent, type FormEvent } from 'react'
@@ -70,7 +71,7 @@ export default function GetStarted() {
         <SectionHeading
           as="h1"
           title="Let's get started."
-          lead="Sign up for a package, or send us a general question. We'll review your details and get back to you."
+          lead="Sign up, or reach out to us. We'll review your details and get back to you."
         />
         {(SITE.email || SITE.phone) && (
           <dl className="flex flex-col gap-3 text-sm">
@@ -303,25 +304,24 @@ function GetStartedForm({ initialService, fromMyPick }: { initialService: string
           </p>
           <p className="mt-1 text-sm text-muted">Share your business details, requirements, or brand materials in whichever way is easiest for you.</p>
         </div>
-        <Field id="gs-brief" label="Business Brief" optional>
-          {({ id }) => (
+        <Field id="gs-brief" label="Business Brief" optional hint="Tell us about your business, what you need, or what you're hoping to achieve.">
+          {({ id, describedBy }) => (
             <Textarea
               id={id}
               rows={4}
-              placeholder="Tell us about your business, what you need, or what you're hoping to achieve."
+              aria-describedby={describedBy}
               value={f.brief}
               onChange={(e) => set('brief', e.target.value)}
             />
           )}
         </Field>
-        <Field id="gs-link" label="Share a Link" optional hint="Please make sure our team has permission to access your shared files." error={errors.link}>
+        <Field id="gs-link" label="Share a Link" optional hint="Paste a Google Drive, Dropbox, or other shared link. Please make sure our team has permission to access your shared files." error={errors.link}>
           {({ id, describedBy, invalid }) => (
             <Input
               id={id}
               type="url"
               inputMode="url"
               autoComplete="url"
-              placeholder="Paste a Google Drive, Dropbox, or other shared link"
               value={f.link}
               onChange={(e) => set('link', e.target.value)}
               aria-invalid={invalid}
@@ -574,7 +574,7 @@ function FileUpload({
 /* ================================================================== */
 
 const EMPTY_ENQUIRY: ContactEnquiry = { name: '', email: '', phone: '', type: '', message: '', consent: false }
-const TYPES = ['General Enquiry', 'Package Enquiry', 'Careers & Opportunities', 'Other Enquiries']
+const TYPES = ['General Enquiry', 'Solution Enquiry', 'Careers & Opportunities', 'Other Enquiries']
 type EnquiryErrors = Partial<Record<keyof ContactEnquiry | 'captcha', string>>
 
 function validateEnquiry(e: ContactEnquiry, spamError: string | null): EnquiryErrors {
@@ -712,7 +712,8 @@ function pickFormFields(d: Partial<SignUpDraft>): Partial<SignUpForm> {
 }
 
 /** Send error, with the WhatsApp / email fallback used on the leads pages. */
-function SendError({ message, fallback }: { message: string; fallback: boolean }) {
+function SendError({ message: full, fallback }: { message: string; fallback: boolean }) {
+  const [message, detail] = full.split(DETAIL_SEP)
   return (
     <div role="alert" className="flex items-start gap-3 rounded-xl border border-danger/40 bg-danger/10 px-4 py-3 text-sm">
       <AlertCircle className="mt-0.5 size-4 shrink-0 text-danger" aria-hidden="true" />
@@ -731,6 +732,7 @@ function SendError({ message, fallback }: { message: string; fallback: boolean }
             .
           </p>
         )}
+        {detail && <p className="text-xs break-words text-subtle">Details: {detail}</p>}
       </div>
     </div>
   )

@@ -60,7 +60,7 @@ export function HeroVisual() {
       {/* Notifications the owner sees */}
       {/* Each card: slides in once, then hovers on its own rhythm */}
       <div className="absolute top-[22%] -left-2 hidden w-60 animate-hover-a md:block lg:-left-10">
-        <div className="flex animate-notify-in items-start gap-3 rounded-2xl border border-line-strong bg-elevated p-3.5 shadow-float [animation-delay:0.6s]">
+        <div className="flex animate-notify-in items-start gap-3 rounded-2xl border border-line-strong bg-elevated p-3.5 shadow-float [animation-delay:0.75s]">
           <span className="grid size-9 shrink-0 place-items-center rounded-full bg-electric text-white"><Bell className="size-4 origin-top animate-ring" /></span>
           <span className="text-xs">
             <span className="block font-semibold">New booking</span>
@@ -69,7 +69,7 @@ export function HeroVisual() {
         </div>
       </div>
       <div className="absolute -right-2 bottom-[14%] hidden w-64 animate-hover-b [animation-delay:-3s] md:block lg:-right-10">
-        <div className="flex animate-notify-in items-start gap-3 rounded-2xl border border-line-strong bg-elevated p-3.5 shadow-float [animation-delay:1.32s]">
+        <div className="flex animate-notify-in items-start gap-3 rounded-2xl border border-line-strong bg-elevated p-3.5 shadow-float [animation-delay:1.6s]">
           <span className="grid size-9 shrink-0 place-items-center rounded-full bg-success text-black"><MessageCircle className="size-4" /></span>
           <span className="text-xs">
             <span className="block font-semibold">New enquiry on WhatsApp</span>

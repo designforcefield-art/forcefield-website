@@ -25,17 +25,29 @@ export async function sendViaFormSubmit(fields: Record<string, string>, files: F
         body: JSON.stringify(base),
       })
     }
-    const data = (await res.json().catch(() => ({ success: res.ok }))) as { success?: boolean | string; message?: string }
+    const text = await res.text()
+    let data: { success?: boolean | string; message?: string } = {}
+    try {
+      data = JSON.parse(text)
+    } catch {
+      // Not JSON (e.g. an HTML error or challenge page)
+      data = { success: false, message: `Unexpected reply: ${text.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 140)}` }
+    }
     if (data.success === true || data.success === 'true') return { ok: true }
-    const message = data.message ?? `Not sent (${res.status})`
-    return { ok: false, activation: /activat/i.test(message), error: message }
-  } catch {
-    return { ok: false, activation: false, error: 'network' }
+    const message = data.message ?? `Not sent (HTTP ${res.status})`
+    console.error('[FormSubmit] not sent', res.status, data)
+    return { ok: false, activation: /activat/i.test(message), error: `HTTP ${res.status}: ${message}` }
+  } catch (err) {
+    console.error('[FormSubmit] request failed', err)
+    return { ok: false, activation: false, error: `Request blocked or offline (${err instanceof Error ? err.message : String(err)})` }
   }
 }
 
 /** Visitor-facing message for a failed send (mirrors the leads pages). */
+export const DETAIL_SEP = '\n\nDetails: '
 export const sendErrorMessage = (r: Extract<SendResult, { ok: false }>) =>
-  r.activation
+  (r.activation
     ? 'Our enquiry inbox is being set up, so your details have not been sent yet.'
-    : 'We couldn’t send your details just now. Everything you entered is still here, so please try again in a moment.'
+    : 'We couldn’t send your details just now. Everything you entered is still here, so please try again in a moment.') +
+  DETAIL_SEP +
+  r.error

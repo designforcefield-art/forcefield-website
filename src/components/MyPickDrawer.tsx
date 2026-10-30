@@ -1,3 +1,4 @@
+import { track } from '../lib/track'
 import { ArrowRight, Bookmark, Compass, Pencil, Trash2, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -53,7 +54,7 @@ export function MyPickDrawer() {
           <div>
             <p className="text-lg font-normal text-fg">Let's find what works for your business.</p>
             <p className="mx-auto mt-2 max-w-xs text-small text-muted">
-              Explore our digital solutions and save the features that interest you. We'll help you find the right package to get started.
+              Explore our digital solutions and save the features that interest you. We'll help you find the right solution to get started.
             </p>
           </div>
           <Button className="mt-2" onClick={() => go('/solutions')} data-autofocus>
@@ -268,7 +269,10 @@ function ToolPickRow({ pick }: { pick: ToolPick }) {
       <span className="min-w-0 flex-1 text-sm text-fg">{name}</span>
       <button
         type="button"
-        onClick={() => removePick(pick, name)}
+        onClick={() => {
+          track('remove', pick.toolId)
+          removePick(pick, name)
+        }}
         aria-label={`Remove ${name}`}
         className="grid size-8 shrink-0 place-items-center rounded-full text-subtle transition-colors hover:bg-raised hover:text-danger focus-visible:ring-2 focus-visible:ring-electric/60 focus-visible:outline-none"
       >
@@ -298,18 +302,18 @@ function PackageRecommendationCard({ toolIds }: { toolIds: string[] }) {
         <>
           <div className="mt-2 flex items-center gap-3">
             <PackageGlyph tier={rec.tier} size="sm" />
-            <h3 id="rec-title" className="text-lg font-normal">{PACKAGE_INFO[rec.tier].name}</h3>
+            <h3 id="rec-title" className="text-lg font-normal">{PACKAGE_INFO[rec.tier].name} Solution</h3>
           </div>
           <p className="mt-2 text-small text-muted">{TIER_COPY[rec.tier]}</p>
           <p className="mt-3 text-small text-fg">
-            Based on your selected solutions, {PACKAGE_INFO[rec.tier].name} may be a suitable fit for your business.
+            Based on your selected solutions, the {PACKAGE_INFO[rec.tier].name} Solution may be a suitable fit for your business.
           </p>
         </>
       ) : (
         <>
-          <h3 id="rec-title" className="mt-2 text-lg font-normal">Package recommendation pending review.</h3>
+          <h3 id="rec-title" className="mt-2 text-lg font-normal">Recommendation pending review.</h3>
           <p className="mt-2 text-small text-muted">
-            We'll check how {listNames(rec.needsReview)} {rec.needsReview.length === 1 ? 'fits' : 'fit'} our packages.
+            We'll check how {listNames(rec.needsReview)} {rec.needsReview.length === 1 ? 'fits' : 'fit'} our Essential and Dynamic Solutions.
           </p>
         </>
       )}
