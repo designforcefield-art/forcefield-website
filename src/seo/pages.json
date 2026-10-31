@@ -7,35 +7,35 @@
       "path": "/",
       "label": "Home",
       "title": "Digital Solutions for Singapore Businesses | Forcefield Design",
-      "description": "Professional websites, online booking, WhatsApp and e-commerce tools for Singapore SMEs, startups and home-based businesses. Set up and managed for you.",
+      "description": "Websites, online booking, e-commerce and AI SEO tools for Singapore businesses of every size, from startups to established firms. Fully managed for you.",
       "priority": "1.0"
     },
     {
       "path": "/solutions",
       "label": "Solutions",
       "title": "Digital Tools for Singapore Businesses | Forcefield Design",
-      "description": "Browse 86 ready-to-deploy digital solutions, from online booking and e-commerce to WhatsApp chat and SEO, for F&B, beauty, retail and service businesses in Singapore.",
+      "description": "Browse 86 ready-to-deploy digital solutions, from online booking and e-commerce to WhatsApp chat and SEO, for Singapore businesses in every industry.",
       "priority": "0.9"
     },
     {
       "path": "/industries",
       "label": "Industries",
       "title": "Website Solutions by Industry in Singapore | Forcefield Design",
-      "description": "Ready-made website solutions for F&B, beauty & wellness, retail, interior design, property, education and professional services in Singapore, with live demos.",
+      "description": "Ready-made website solutions for Singapore F&B, beauty & wellness, retail, interior design, property, education and professional services, with demos.",
       "priority": "0.9"
     },
     {
       "path": "/discovery",
       "label": "Discovery",
       "title": "Discovery Consultation in Singapore | Forcefield Design",
-      "description": "Not sure what your business needs online? Our Discovery workshops map your challenges and recommend the right digital solutions for your SME or startup.",
+      "description": "Not sure what your business needs online? Our Discovery workshops in Singapore map your challenges and recommend the right digital solutions.",
       "priority": "0.8"
     },
     {
       "path": "/about",
       "label": "About",
       "title": "About Forcefield Design | Singapore Digital Solutions Partner",
-      "description": "Forcefield Design started as a Singapore design studio. Today we help SMEs, startups and home-based businesses get online and grow with practical digital solutions.",
+      "description": "Forcefield Design began as a Singapore design studio. Today we help businesses of every size get online and grow with practical digital solutions.",
       "priority": "0.6"
     },
     {
@@ -48,6 +48,6 @@
   ],
   "noindex": {
     "title": "Page not found | Forcefield Design",
-    "description": "This page isn't available. Explore digital solutions for Singapore businesses at Forcefield Design."
+    "description": "This page isn't available. Explore digital solutions for Singapore businesses of every size at Forcefield Design."
   }
 }

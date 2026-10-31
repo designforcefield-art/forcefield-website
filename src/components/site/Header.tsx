@@ -124,7 +124,7 @@ export function Header() {
                         'flex items-start gap-3 rounded-card p-3 transition-colors hover:bg-raised',
                       )}
                     >
-                      <span className="grid size-10 shrink-0 place-items-center rounded-xl border border-transparent bg-raised text-fg shadow-rim">
+                      <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-elevated text-fg shadow-rim">
                         <I className="size-5" aria-hidden="true" />
                       </span>
                       <span>

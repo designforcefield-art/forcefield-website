@@ -127,3 +127,18 @@ export function SectionHeading({
     </div>
   )
 }
+
+/** Step / principle number on a small card tile (replaces large display numbers). */
+export function NumberTile({ n, className }: { n: string; className?: string }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={cn(
+        'grid size-11 shrink-0 place-items-center rounded-xl bg-elevated text-base font-medium text-glow tabular-nums shadow-rim',
+        className,
+      )}
+    >
+      {n}
+    </span>
+  )
+}

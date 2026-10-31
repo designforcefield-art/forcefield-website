@@ -17,12 +17,12 @@ export const ORGANIZATION = {
   logo: url('/logo.png'),
   image: url(seo.ogImage),
   description:
-    'Forcefield Design provides websites and digital solutions for SMEs, startups and home-based businesses in Singapore.',
+    'Forcefield Design provides websites and digital solutions for Singapore businesses of every size, from startups to established companies.',
   email: 'support@forcefield.design',
   telephone: '+65 8083 6840',
   address: { '@type': 'PostalAddress', addressCountry: 'SG' },
   areaServed: { '@type': 'Country', name: 'Singapore' },
-  knowsAbout: ['Website design', 'E-commerce websites', 'Online booking systems', 'WhatsApp business chat', 'Local SEO', 'Digital transformation for SMEs'],
+  knowsAbout: ['Website design', 'E-commerce websites', 'Online booking systems', 'WhatsApp business chat', 'Local SEO', 'Digital transformation for businesses'],
   sameAs: [
     'https://www.instagram.com/forcefield.design/',
     'https://www.facebook.com/profile.php?id=61577197974708',
@@ -40,8 +40,14 @@ export const WEBSITE = {
   publisher: { '@id': url('/#organization') },
 }
 
-const AUDIENCE = { '@type': 'BusinessAudience', audienceType: 'SMEs, startups and home-based businesses in Singapore' }
-const service = (name, description, path) => ({
+const AUDIENCE = { '@type': 'BusinessAudience', audienceType: 'Singapore businesses of every size, from startups to established companies' }
+const monthly = (amount) => ({
+  '@type': 'Offer',
+  price: String(amount),
+  priceCurrency: 'SGD',
+  priceSpecification: { '@type': 'UnitPriceSpecification', price: amount, priceCurrency: 'SGD', unitText: 'MONTH' },
+})
+const service = (name, description, path, offers) => ({
   '@type': 'Service',
   name,
   description,
@@ -50,6 +56,7 @@ const service = (name, description, path) => ({
   provider: { '@id': url('/#organization') },
   areaServed: { '@type': 'Country', name: 'Singapore' },
   audience: AUDIENCE,
+  ...(offers ? { offers } : {}),
 })
 
 export const SERVICES = {
@@ -58,8 +65,8 @@ export const SERVICES = {
   name: 'Forcefield Design services',
   itemListElement: [
     service('Discovery Consultation', 'Workshops that uncover your business challenges and identify the right digital solutions.', '/discovery'),
-    service('Essential Solution', 'A professional 3-page website, fully managed by our team, with preset pages and features for your industry.', '/industries'),
-    service('Dynamic Solution', 'A scalable website with full control, AI SEO tools, customisable features and dedicated support.', '/industries'),
+    service('Essential Solution', 'A professional 3-page website, fully managed by our team, with preset pages and features for your industry.', '/industries', monthly(150)),
+    service('Dynamic Solution', 'A scalable website with full control, AI SEO tools, customisable features and dedicated support.', '/industries', monthly(300)),
   ].map((item, i) => ({ '@type': 'ListItem', position: i + 1, item })),
 }
 
@@ -76,11 +83,11 @@ export const INDUSTRIES = [
 export const INDUSTRY_LIST = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Website packages by industry in Singapore',
+  name: 'Website solutions by industry in Singapore',
   itemListElement: INDUSTRIES.map((name, i) => ({
     '@type': 'ListItem',
     position: i + 1,
-    item: service(`${name} website`, `Website package for ${name.toLowerCase()} businesses in Singapore.`, '/industries'),
+    item: service(`${name} website`, `Website solution for ${name.toLowerCase()} businesses in Singapore.`, '/industries'),
   })),
 }
 

@@ -643,6 +643,8 @@ export interface Offering {
   headline: string
   description: string
   features: string[]
+  /** Monthly price (confirmed by Forcefield, 31 Oct 2026). Omitted when quoted per project. */
+  price?: { amount: string; period: string }
   cta: { label: string; to: string }
   recommended?: boolean
 }
@@ -666,22 +668,24 @@ export const OFFERINGS: Offering[] = [
     id: 'essential',
     name: 'Essential',
     headline: 'We handle everything.',
-    description: 'Get a professional website without the hassle. We build, manage, and maintain it for you.',
-    features: ['Professional 3-page website', 'Industry-specific preset design', 'Website updates and maintenance', 'Dedicated support team'],
+    description: 'Get your business online without the hassle. We build, manage, and maintain your website so you can focus on what matters.',
+    price: { amount: 'S$150', period: '/month' },
+    features: ['Professional 3-page website', 'Industry-specific preset design', 'Done-for-you website management', 'Hosting, maintenance & support'],
     // Industry cards show the Essential and Dynamic demo websites.
     cta: { label: 'Explore Essential', to: '/industries' },
   },
   {
     id: 'dynamic',
     name: 'Dynamic',
-    headline: 'Take control & grow.',
-    description: 'A flexible website you control, backed by expert support as your business grows.',
+    headline: 'Take control. Grow further.',
+    description: 'A powerful website with smart tools and the flexibility to grow alongside your business.',
+    price: { amount: 'S$300', period: '/month' },
     features: [
-      'Unlimited website pages',
+      'Flexible, scalable website',
       'Industry-specific preset design',
       'Easy-to-use admin panel',
       'AI-powered SEO tools',
-      'Dedicated support and on-demand features',
+      'Smart integrations & dedicated support',
     ],
     // No Dynamic details page exists yet: the solutions list lets visitors pick Dynamic per solution.
     cta: { label: 'Explore Dynamic', to: '/industries' },

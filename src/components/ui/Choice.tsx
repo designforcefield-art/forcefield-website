@@ -53,8 +53,8 @@ export function ChoiceCard({
       {icon && (
         <span
           className={cn(
-            'grid size-11 shrink-0 place-items-center rounded-xl border transition-colors',
-            checked ? 'border-electric-bright/50 bg-electric/25 text-glow' : 'border-line bg-elevated text-muted group-hover:text-fg',
+            'grid size-11 shrink-0 place-items-center rounded-xl border shadow-rim transition-colors',
+            checked ? 'border-electric-bright/50 bg-electric/25 text-glow' : 'border-transparent bg-elevated text-muted group-hover:text-fg',
           )}
         >
           {icon}

@@ -122,7 +122,7 @@ const tile: Record<Size, { box: string; icon: string }> = {
 function Tile({ children, size = 'md', className }: { children: ReactNode; size?: Size; className?: string }) {
   const t = tile[size]
   return (
-    <span className={cn('grid shrink-0 place-items-center bg-elevated text-fg', t.box, className)}>
+    <span className={cn('grid shrink-0 place-items-center bg-elevated text-fg shadow-rim', t.box, className)}>
       <LineIcon className={t.icon}>{children}</LineIcon>
     </span>
   )
@@ -134,6 +134,11 @@ export function SolutionGlyph({ id, size, className }: { id: SolutionId; size?: 
 
 export function PackageGlyph({ tier, size, className }: { tier: OfferingTier; size?: Size; className?: string }) {
   return <Tile size={size} className={className}>{PACKAGE_LINES[tier]}</Tile>
+}
+
+/** Raw package icon (no tile), e.g. inside the About page journey nodes. */
+export function PackageLines({ tier, className, strokeWidth }: { tier: OfferingTier; className?: string; strokeWidth?: number }) {
+  return <LineIcon className={className} strokeWidth={strokeWidth}>{PACKAGE_LINES[tier]}</LineIcon>
 }
 
 /** Raw shapes, for larger compositions (solution cards and page banners). */

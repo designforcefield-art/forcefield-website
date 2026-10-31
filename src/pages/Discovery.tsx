@@ -1,7 +1,7 @@
 import { ArrowRight, Check, FileText, Lightbulb, Map } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { PackageGlyph } from '../components/AbstractIcon'
-import { ButtonLink, Container, Eyebrow, cn } from '../components/ui/primitives'
+import { ButtonLink, Container, Eyebrow, NumberTile, cn } from '../components/ui/primitives'
 
 /** Every Discovery CTA opens the Get Started form with Discovery preselected. */
 const START = '/get-started?service=discovery'
@@ -173,12 +173,7 @@ export default function Discovery() {
         <ol className="relative grid gap-3 md:grid-cols-2 lg:grid-cols-4">
           {PROCESS.map((s, i) => (
             <li key={s.title} className="flex h-full flex-col gap-4 rounded-panel border border-line bg-surface p-6">
-              <span
-                aria-hidden="true"
-                className="text-[2.25rem] leading-none font-normal tracking-[-0.03em] text-cyan tabular-nums [font-family:var(--font-display)]"
-              >
-                {num(i)}
-              </span>
+              <NumberTile n={num(i)} />
               <h3 className="text-card-title font-normal">
                 <span className="sr-only">Step {i + 1}: </span>
                 {s.title}

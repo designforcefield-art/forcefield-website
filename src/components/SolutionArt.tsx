@@ -706,7 +706,7 @@ export function SolutionArtPanel({ id, className }: { id: string; className?: st
 /** Small square tile (drawer, quote summary, goal tiles). */
 export function SolutionArtTile({ id, className, iconClassName }: { id: string; className?: string; iconClassName?: string }) {
   return (
-    <span aria-hidden="true" className={cn('grid size-10 shrink-0 place-items-center rounded-xl bg-elevated text-fg', className)}>
+    <span aria-hidden="true" className={cn('grid size-10 shrink-0 place-items-center rounded-xl bg-elevated text-fg shadow-rim', className)}>
       <LineIcon className={cn('size-[1.65rem]', iconClassName)}>{SOLUTION_ART[id]}</LineIcon>
     </span>
   )

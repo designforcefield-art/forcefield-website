@@ -2,7 +2,7 @@ import { ArrowRight, Check, Rocket } from 'lucide-react'
 import { ToolCard } from '../components/ToolCard'
 import { getFeaturedSolutions } from '../data/solutionsCatalogue'
 import { HeroVisual } from '../components/site/HeroVisual'
-import { Badge, ButtonLink, Container, SectionHeading, cn } from '../components/ui/primitives'
+import { Badge, ButtonLink, Container, NumberTile, SectionHeading, cn } from '../components/ui/primitives'
 import { OFFERINGS } from '../data/catalogue'
 import { PackageGlyph } from '../components/AbstractIcon'
 
@@ -75,12 +75,7 @@ function ThreeSteps() {
         <ol className="grid gap-3 md:grid-cols-3">
           {STEPS_SIMPLE.map((st, i) => (
             <li key={st.title} className="flex h-full flex-col gap-4 rounded-panel border border-line bg-surface p-6 sm:p-8">
-              <span
-                aria-hidden="true"
-                className="text-[2.5rem] leading-none font-normal tracking-[-0.03em] text-cyan tabular-nums [font-family:var(--font-display)] sm:text-[2.75rem]"
-              >
-                {String(i + 1).padStart(2, '0')}
-              </span>
+              <NumberTile n={String(i + 1).padStart(2, '0')} />
               <div className="flex flex-col gap-2">
                 <h3 className="text-card-title font-normal text-fg">
                   <span className="sr-only">Step {i + 1}: </span>
@@ -140,7 +135,7 @@ function Packages() {
               className={cn(
                 // On desktop each card is a subgrid row-set, so headlines, descriptions,
                 // dividers and buttons line up across all three cards.
-                'flex h-full flex-col rounded-panel border bg-surface p-6 sm:p-8 lg:row-span-5 lg:grid lg:grid-rows-subgrid lg:gap-y-0',
+                'flex h-full flex-col rounded-panel border bg-surface p-6 sm:p-8 lg:row-span-6 lg:grid lg:grid-rows-subgrid lg:gap-y-0',
                 o.recommended ? 'border-electric/70' : 'border-line',
               )}
             >
@@ -153,20 +148,34 @@ function Packages() {
               </div>
               <h3 className="mt-6 text-card-title font-normal">{o.headline}</h3>
               <p className="mt-2 text-card-body text-muted">{o.description}</p>
-              <ul className="mt-6 flex flex-col gap-3 self-start border-t border-line pt-6 lg:w-full">
+              {/* Price row (Discovery is quoted per project) */}
+              <p className="mt-6 flex items-baseline gap-1 lg:self-end">
+                {o.price ? (
+                  <>
+                    <span className="text-[2rem] leading-none font-normal tracking-[-0.02em] text-fg tabular-nums [font-family:var(--font-display)]">{o.price.amount}</span>
+                    <span className="text-sm text-muted">{o.price.period}</span>
+                  </>
+                ) : (
+                  <span className="text-base text-muted">Quoted separately</span>
+                )}
+              </p>
+              <div className="mt-6 w-full border-t border-line pt-6">
+                <p className="text-xs font-medium text-subtle">What's included</p>
+                <ul className="mt-3 flex flex-col gap-3">
                 {o.features.map((f) => (
                   <li key={f} className="flex items-start gap-3 text-sm">
                     <Check className="mt-0.5 size-4 shrink-0 text-cyan" aria-hidden="true" /> {f}
                   </li>
                 ))}
-              </ul>
+                </ul>
+              </div>
               <div className="mt-auto pt-8 lg:self-end">
                 <ButtonLink
                   to={o.cta.to}
                   variant={o.recommended ? 'primary' : 'secondary'}
                   className="w-full"
                 >
-                  {o.cta.label}
+                  {o.cta.label} <ArrowRight className="size-4" aria-hidden="true" />
                 </ButtonLink>
               </div>
             </li>
@@ -184,7 +193,7 @@ function LaunchCta() {
       <Container>
         <div className="relative overflow-hidden rounded-[2rem] border border-line bg-surface px-6 py-14 text-center sm:px-12 sm:py-20">
           <div className="relative mx-auto flex max-w-2xl flex-col items-center gap-5">
-            <span className="grid size-12 place-items-center rounded-full bg-raised shadow-rim"><Rocket className="size-6" aria-hidden="true" /></span>
+            <span className="grid size-11 place-items-center rounded-xl bg-elevated text-fg shadow-rim"><Rocket className="size-6" aria-hidden="true" /></span>
             <h2 id="launch-title" className="text-h2 font-normal">Ready to launch your website?</h2>
             <p className="text-lead text-muted">
               Tell us about your business, and we'll take care of the setup so you can focus on what matters.

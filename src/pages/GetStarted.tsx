@@ -6,7 +6,7 @@ import { useLocation, useSearchParams } from 'react-router-dom'
 import { SocialLinks } from '../components/SocialLinks'
 import { PackageGlyph } from '../components/AbstractIcon'
 import { SpamCheck, useSpamCheck } from '../components/SpamCheck'
-import { Field, Input, Select, Textarea } from '../components/ui/Field'
+import { Field, InfoTip, Input, Select, Textarea } from '../components/ui/Field'
 import { Button, Container, SectionHeading, cn } from '../components/ui/primitives'
 import { SITE } from '../data/catalogue'
 import { submitContactEnquiry, type ContactEnquiry } from '../lib/quote'
@@ -308,7 +308,7 @@ function GetStartedForm({ initialService, fromMyPick }: { initialService: string
           </p>
           <p className="mt-1 text-sm text-muted">Share your business details, requirements, or brand materials in whichever way is easiest for you.</p>
         </div>
-        <Field id="gs-brief" label="Business Brief" optional hint="Tell us about your business, what you need, or what you're hoping to achieve.">
+        <Field id="gs-brief" label="Business Brief" optional hintTooltip hint="Tell us about your business, what you need, or what you're hoping to achieve.">
           {({ id, describedBy }) => (
             <Textarea
               id={id}
@@ -319,7 +319,7 @@ function GetStartedForm({ initialService, fromMyPick }: { initialService: string
             />
           )}
         </Field>
-        <Field id="gs-link" label="Share a Link" optional hint="Paste a Google Drive, Dropbox, or other shared link. Please make sure our team has permission to access your shared files." error={errors.link}>
+        <Field id="gs-link" label="Share a Link" optional hintTooltip hint="Paste a Google Drive, Dropbox, or other shared link. Please make sure our team has permission to access your shared files." error={errors.link}>
           {({ id, describedBy, invalid }) => (
             <Input
               id={id}
@@ -428,6 +428,8 @@ function ServiceCards({ value, onChange, error, note }: { value: string; onChang
   )
 }
 
+const FILES_HINT = `Upload your company profile, business requirements, brand guidelines, or other relevant documents. PDF, DOC, DOCX, JPG or PNG, up to ${MAX_FILES} files and 10 MB in total. Large photos are reduced automatically.`
+
 function FileUpload({
   files,
   setFiles,
@@ -490,9 +492,15 @@ function FileUpload({
 
   return (
     <div className="flex flex-col gap-1.5">
-      <p id="gs-files-label" className="flex items-baseline justify-between text-sm font-medium text-fg">
-        Upload Files <span className="text-xs font-normal text-subtle">Optional</span>
-      </p>
+      <div className="flex items-center justify-between gap-3">
+        <span className="relative flex items-center gap-1.5">
+          <p id="gs-files-label" className="text-sm font-medium text-fg">
+            Upload Files
+          </p>
+          <InfoTip label="Upload Files" text={FILES_HINT} />
+        </span>
+        <span className="text-xs font-normal text-subtle">Optional</span>
+      </div>
       <div
         onDragOver={(e) => {
           e.preventDefault()
@@ -530,8 +538,8 @@ function FileUpload({
           onChange={(e) => addFiles(e.target.files)}
         />
       </div>
-      <p id="gs-files-hint" className="text-xs text-subtle">
-        Upload your company profile, business requirements, brand guidelines, or other relevant documents. PDF, DOC, DOCX, JPG or PNG, up to {MAX_FILES} files and 10 MB in total. Large photos are reduced automatically.
+      <p id="gs-files-hint" className="sr-only">
+        {FILES_HINT}
       </p>
       {preparing && (
         <p className="flex items-center gap-2 text-xs text-subtle" role="status">

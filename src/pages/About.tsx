@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { ServiceJourney } from '../components/ServiceJourney'
-import { ButtonLink, Container, Eyebrow, cn } from '../components/ui/primitives'
+import { ButtonLink, Container, Eyebrow, NumberTile, cn } from '../components/ui/primitives'
 
 
 /** Section wrapper: one consistent vertical rhythm. */
@@ -83,8 +83,8 @@ export default function About() {
       </Section>
 
       {/* What We Do — interactive timeline */}
-      <Section id="what-title" className="pt-0">
-        <div className="flex max-w-3xl flex-col gap-4">
+      <Section id="what-title" className="overflow-x-clip pt-0">
+        <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
           <Eyebrow>What we do</Eyebrow>
           <h2 id="what-title" className="text-h2 font-normal">The right solution, at every stage.</h2>
           <p className="text-lead text-muted">
@@ -102,14 +102,9 @@ export default function About() {
         </div>
         <ol className="grid gap-3 md:grid-cols-2">
           {PRINCIPLES.map((p, i) => (
-            <li key={p.title} className="flex gap-5 rounded-panel border border-line bg-surface p-6 sm:gap-6 sm:p-8">
-              <span
-                aria-hidden="true"
-                className="w-12 shrink-0 text-[2.25rem] leading-none font-normal tracking-[-0.03em] text-cyan tabular-nums [font-family:var(--font-display)] sm:w-14 sm:text-[2.5rem]"
-              >
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <div className="flex flex-col gap-2 pt-1">
+            <li key={p.title} className="flex flex-col gap-5 rounded-panel border border-line bg-surface p-6 sm:p-8">
+              <NumberTile n={String(i + 1).padStart(2, '0')} />
+              <div className="flex flex-col gap-2">
                 <h3 className="text-card-title font-normal">
                   <span className="sr-only">Principle {i + 1}: </span>
                   {p.title}
@@ -128,15 +123,13 @@ export default function About() {
             <div className="flex flex-col gap-4">
               <Eyebrow>Our commitment</Eyebrow>
               <h2 id="commit-title" className="text-h2 font-normal">Your business comes first.</h2>
-              <p className="text-lead text-fg">We're not here to sell you features you don't need.</p>
+              <p className="text-lead text-fg">The right solutions for your business. Nothing more, nothing less.</p>
             </div>
             <div className="flex flex-col gap-4 text-body-lg text-muted lg:pt-11">
               <p>
-                We believe in recommending the right solutions, keeping things straightforward, and building lasting relationships with the businesses we support.
+                We believe going digital should be simple. That's why we take the time to understand your needs, recommend practical solutions, and make technology work for your business.
               </p>
-              <p>
-                Whether it's your first website or the next stage of your digital journey, we're here to help you move forward with confidence.
-              </p>
+              <p>Whether you're just getting started or ready to grow, we're here to make every step easier.</p>
               <ButtonLink to="/get-started" size="lg" className="mt-4 w-full sm:w-fit">
                 Get Started <ArrowRight className="size-4" aria-hidden="true" />
               </ButtonLink>

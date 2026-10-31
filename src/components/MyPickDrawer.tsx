@@ -48,7 +48,7 @@ export function MyPickDrawer() {
     >
       {count === 0 ? (
         <div className="flex flex-col items-center gap-4 py-12 text-center">
-          <span className="grid size-16 place-items-center rounded-2xl border border-line-strong bg-elevated text-glow">
+          <span className="grid size-16 place-items-center rounded-2xl bg-elevated text-glow shadow-rim">
             <Bookmark className="size-7" aria-hidden="true" />
           </span>
           <div>
@@ -218,7 +218,7 @@ function DiscoveryPickCard({ pick }: { pick: DiscoveryPick }) {
   return (
     <article className="rounded-card border border-line bg-surface p-4">
       <div className="flex items-start gap-3">
-        <span className="grid size-10 shrink-0 place-items-center rounded-xl border border-electric/40 bg-electric/20 text-glow">
+        <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-elevated text-glow shadow-rim">
           <Compass className="size-5" aria-hidden="true" />
         </span>
         <div className="min-w-0 flex-1">

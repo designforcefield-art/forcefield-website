@@ -113,7 +113,7 @@ export default function Solutions() {
                   >
                     <span
                       aria-hidden="true"
-                      className={cn('grid size-11 shrink-0 place-items-center rounded-xl bg-elevated', on ? 'text-glow ring-1 ring-electric/70' : 'text-fg')}
+                      className={cn('grid size-11 shrink-0 place-items-center rounded-xl bg-elevated shadow-rim', on ? 'text-glow ring-1 ring-electric/70' : 'text-fg')}
                     >
                       <Icon name={o.icon ?? 'Sparkles'} strokeWidth={1.25} className="size-5" />
                     </span>

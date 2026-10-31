@@ -2,15 +2,12 @@ import { ArrowRight, ChevronDown, ChevronUp } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Icon } from '../components/ui/Icon'
-import { Badge, Container, SectionHeading, cn } from '../components/ui/primitives'
+import { Container, SectionHeading, cn } from '../components/ui/primitives'
 import { INDUSTRIES } from '../data/catalogue'
 import { INDUSTRY_DEMOS, INDUSTRY_SOLUTIONS, demoUrl, digitalSolutionById, type IndustryDemos } from '../data/solutionsCatalogue'
 import type { Industry } from '../data/types'
 
 type Tier = 'essential' | 'dynamic'
-
-/** How many recommended solutions show on a collapsed card. */
-const PREVIEW_COUNT = 4
 
 const PACKAGES: Record<Tier, { name: string; description: string; note: string }> = {
   essential: {
@@ -83,10 +80,8 @@ function DemoLinks({ demos, tier }: { demos: IndustryDemos | undefined; tier: Ti
 function IndustryCard({ ind, expanded, onToggle }: { ind: Industry; expanded: boolean; onToggle: () => void }) {
   const demos = INDUSTRY_DEMOS[ind.id]
   const solutions = INDUSTRY_SOLUTIONS[ind.id]
-  const remaining = Math.max(0, solutions.length - PREVIEW_COUNT)
   const [tier, setTier] = useState<Tier>('essential')
   const regionId = `industry-${ind.id}-details`
-  const shown = expanded ? solutions : solutions.slice(0, PREVIEW_COUNT)
 
   // Each time the card opens, start on Essential.
   useEffect(() => {
@@ -100,31 +95,13 @@ function IndustryCard({ ind, expanded, onToggle }: { ind: Industry; expanded: bo
         expanded ? 'border-line-strong' : 'border-line',
       )}
     >
-      <div className="flex items-start justify-between gap-3">
-        <span className="grid size-11 place-items-center rounded-full bg-raised text-fg shadow-rim">
+      <div className="flex items-center gap-3">
+        <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-elevated text-fg shadow-rim">
           <Icon name={ind.icon} className="size-5" />
         </span>
-        {!demos && <Badge>Demo Coming Soon</Badge>}
+        <h2 className="text-item-title font-normal">{ind.name}</h2>
       </div>
-      <h2 className="mt-5 text-item-title font-normal">{ind.name}</h2>
-      <p className="mt-1.5 text-small text-muted">{ind.intro}</p>
-
-      <p className="mt-5 text-xs font-medium text-subtle">Recommended solutions</p>
-      {/* One list: the first four when collapsed, every solution when open. */}
-      <ul className="mt-2 flex flex-wrap gap-1.5">
-        {shown.map((sid) => (
-          <li key={sid}>
-            <span className="inline-flex rounded-full border border-line bg-elevated/60 px-2.5 py-1 text-xs text-muted">
-              {digitalSolutionById(sid)?.name}
-            </span>
-          </li>
-        ))}
-      </ul>
-      {!expanded && remaining > 0 && (
-        <p className="mt-2 text-xs text-subtle">
-          +{remaining} more {remaining === 1 ? 'solution' : 'solutions'}
-        </p>
-      )}
+      <p className="mt-3 text-small text-muted">{ind.intro}</p>
 
       {/* Expandable details (grid-rows trick for a subtle height transition). */}
       <div
@@ -138,7 +115,7 @@ function IndustryCard({ ind, expanded, onToggle }: { ind: Industry; expanded: bo
         )}
       >
         <div className="overflow-hidden">
-          <div className="mt-6 flex flex-col gap-4 border-t border-line pt-6">
+          <div className="mt-6 flex flex-col gap-4 border-y border-line py-6">
             <p className="text-sm font-medium text-fg">Choose your solution</p>
             <div
               role="group"
@@ -167,8 +144,19 @@ function IndustryCard({ ind, expanded, onToggle }: { ind: Industry; expanded: bo
             </div>
             <DemoLinks demos={demos} tier={tier} />
           </div>
+          <p className="mt-6 text-xs font-medium text-subtle">Recommended solutions</p>
+          <ul className="mt-2 flex flex-wrap gap-1.5">
+            {solutions.map((sid) => (
+              <li key={sid}>
+                <span className="inline-flex rounded-full border border-line bg-elevated/60 px-2.5 py-1 text-xs text-muted">
+                  {digitalSolutionById(sid)?.name}
+                </span>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
+
 
       <div className="mt-auto pt-6">
         <button
