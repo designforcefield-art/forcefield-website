@@ -189,9 +189,6 @@ export function Header() {
               <I className="size-5 text-glow" aria-hidden="true" /> {label}
             </NavLink>
           ))}
-          <NavLink to="/discovery" className={({ isActive }) => cn('flex items-center gap-3 rounded-xl px-3 py-3 text-lg font-medium', isActive ? 'bg-elevated text-fg' : 'text-muted')}>
-            <Compass className="size-5 text-glow" aria-hidden="true" /> Discovery Consultation
-          </NavLink>
           <NavLink to="/contact" className={({ isActive }) => cn('mt-4 rounded-xl px-3 py-3 text-lg font-medium', isActive ? 'text-fg' : 'text-muted')}>
             Contact Us
           </NavLink>
