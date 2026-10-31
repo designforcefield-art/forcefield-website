@@ -56,6 +56,8 @@ function DemoLinks({ demos, tier }: { demos: IndustryDemos | undefined; tier: Ti
                   'group demo-glow bg-raised text-fg transition-[background-color,box-shadow] duration-300 outline-none hover:bg-raised-hover focus-visible:ring-2 focus-visible:ring-electric/60',
                 )}
               >
+                <span className="demo-halo" aria-hidden="true" />
+                <span className="demo-edge" aria-hidden="true" />
                 {l.label}
                 <ArrowRight className="size-4 text-muted transition-[color,transform] group-hover:text-fg duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
                 <span className="sr-only">(opens in a new tab)</span>
@@ -110,6 +112,7 @@ function IndustryCard({ ind, expanded, onToggle }: { ind: Industry; expanded: bo
         role="region"
         aria-label={`${ind.name}: solutions and demos`}
         inert={!expanded}
+        data-expanded={expanded}
         className={cn(
           'grid transition-[grid-template-rows,opacity] duration-300 ease-out motion-reduce:transition-none',
           expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0',

@@ -378,6 +378,39 @@ li + li .demo-glow::before { animation-delay: 1.4s; }
   0% { box-shadow: 0 0 0 0 rgb(255 255 255 / 0.1); }
   70%, 100% { box-shadow: 0 0 0 10px rgb(255 255 255 / 0); }
 }
+/* A light catching the top edge, played once each time an industry card opens.
+   .demo-edge paints only the 1px border ring (mask); .demo-halo is the soft light above it. */
+.demo-edge,
+.demo-halo {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+}
+.demo-edge {
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: radial-gradient(55% 120% at 50% 0%, rgb(255 255 255 / 0.95), rgb(255 255 255 / 0.25) 45%, transparent 75%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.demo-halo {
+  left: 20%;
+  right: 20%;
+  top: -14px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(50% 50% at 50% 70%, rgb(255 255 255 / 0.22), transparent 100%);
+  filter: blur(4px);
+}
+[data-expanded='true'] .demo-edge,
+[data-expanded='true'] .demo-halo { animation: demo-edge 2s ease-out 0.35s both; }
+@keyframes demo-edge {
+  0% { opacity: 0; }
+  30% { opacity: 1; }
+  100% { opacity: 0; }
+}
 @media (prefers-reduced-motion: reduce) {
-  .demo-glow::before { animation: none; }
+  .demo-glow::before, [data-expanded='true'] .demo-edge, [data-expanded='true'] .demo-halo { animation: none; }
 }

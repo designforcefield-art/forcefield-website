@@ -4,6 +4,7 @@ Each build matches the version number in the published prototype's history.
 
 | Build | Date | Summary |
 |---|---|---|
+| 107 | 2026-10-31 | Industries: when a card opens, its View Website Demo button's top edge lights up once (a thin highlight with a soft halo above), then fades out over about 2 s. Plays again each time the card is reopened; off for reduced-motion users. |
 | 106 | 2026-10-31 | Industries: subtler demo button glow: the pulse ring is half as bright and travels less far (10px), and the resting and hover glows are softer. |
 | 105 | 2026-10-31 | Industries: View Website Demo buttons get a fading pulse ring like the WhatsApp button (grey, every 4.2 s, second button offset), replacing the static halo rings; embossed dark base and soft glow kept. Off for reduced-motion users. |
 | 104 | 2026-10-31 | Industries: View Website Demo buttons drop the grey rim and go back to the standard embossed dark button, keeping the soft grey halo rings and glow (stronger on hover). |
