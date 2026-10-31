@@ -52,8 +52,8 @@ function DemoLinks({ demos, tier }: { demos: IndustryDemos | undefined; tier: Ti
                 rel="noopener"
                 className={cn(
                   pill,
-                  // Dark button with a bright grey rim and soft halo rings (styles.css .demo-glow).
-                  'group demo-glow border-2 border-white/35 bg-raised text-fg transition-[background-color,border-color,box-shadow] duration-300 outline-none hover:border-white/55 hover:bg-raised-hover focus-visible:ring-2 focus-visible:ring-electric/60',
+                  // Standard embossed dark button with soft grey halo rings (styles.css .demo-glow).
+                  'group demo-glow bg-raised text-fg transition-[background-color,box-shadow] duration-300 outline-none hover:bg-raised-hover focus-visible:ring-2 focus-visible:ring-electric/60',
                 )}
               >
                 {l.label}
