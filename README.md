@@ -144,6 +144,10 @@ The site uses relative paths and hash URLs (`/#/about`), so it works at
   Each page's `lastmod` in `pages.json` is the date its content last changed: update it when you edit that page.
   Override the domain for a
   staging build with `SITE_URL=https://… npm run build`.
+- `scripts/seo-check.mjs` then checks the output and fails the build on a problem: one canonical per page matching
+  the domain, unique titles and descriptions, sitemap and robots.txt, noindex on `admin.html`/`404.html`, valid JSON-LD,
+  safe `_redirects`, and structured-data prices matching `src/data/catalogue.ts`. Run it alone with `npm run check:seo`.
+- Old `/solutions/<id>` detail pages redirect to `/solutions`; they are not indexed (86 thin, near-identical pages).
 - After launch: add the domain in Google Search Console and submit `/sitemap.xml`.
 
 ## All Solutions tracking and Admin stats (Cloudflare)

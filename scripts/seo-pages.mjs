@@ -16,6 +16,7 @@ const hashMode = process.env.VITE_ROUTER === 'hash'
 const abs = (p) => SITE + p
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;')
 const today = new Date().toISOString().slice(0, 10)
+const OG_ALT = 'Forcefield Design: digital solutions for every stage of business'
 
 const template = readFileSync(join(DIST, 'index.html'), 'utf8')
 if (!template.includes('<!--seo:start-->')) throw new Error('index.html is missing the <!--seo:start--> marker')
@@ -27,7 +28,7 @@ function head(page) {
   return `<!--seo:start-->
     <title>${esc(page.title)}</title>
     <meta name="description" content="${esc(page.description)}" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="${abs(page.path)}" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="${esc(seo.siteName)}" />
@@ -38,10 +39,12 @@ function head(page) {
     <meta property="og:image" content="${abs(seo.ogImage)}" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="${esc(OG_ALT)}" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${esc(page.title)}" />
     <meta name="twitter:description" content="${esc(page.description)}" />
     <meta name="twitter:image" content="${abs(seo.ogImage)}" />
+    <meta name="twitter:image:alt" content="${esc(OG_ALT)}" />
     ${ld}
     <!--seo:end-->`
 }
@@ -86,6 +89,12 @@ writeFileSync(join(DIST, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /adm
 // Cloudflare Pages: permanent redirects for retired addresses, then the app for anything else.
 writeFileSync(
   join(DIST, '_redirects'),
-  ['/contact /get-started 301', '/finder /solutions 301', '/industries/* /industries 301'].join('\n') + '\n',
+  [
+    '/contact /get-started 301',
+    '/finder /solutions 301',
+    '/industries/* /industries 301',
+    // Old per-solution detail pages (unlinked since the catalogue redesign) → the catalogue.
+    '/solutions/* /solutions 301',
+  ].join('\n') + '\n',
 )
 console.log(`SEO: ${hashMode ? 1 : seo.pages.length} page file(s)${hashMode ? '' : ' + admin/404'}, sitemap, robots.txt, _redirects for ${SITE}`)

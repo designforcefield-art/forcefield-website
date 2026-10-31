@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build && node scripts/seo-pages.mjs",
+    "build": "tsc -b && vite build && node scripts/seo-pages.mjs && node scripts/seo-check.mjs",
+    "check:seo": "node scripts/seo-check.mjs",
     "lint": "oxlint",
     "preview": "vite preview",
     "build:artifact": "tsc -b && VITE_ROUTER=memory vite build --mode artifact",

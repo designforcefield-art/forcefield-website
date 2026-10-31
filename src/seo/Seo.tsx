@@ -40,7 +40,7 @@ export function Seo() {
     const description = page?.description ?? seo.noindex.description
     document.title = title
     setMeta('name', 'description', description)
-    setMeta('name', 'robots', page ? 'index, follow' : 'noindex, follow')
+    setMeta('name', 'robots', page ? 'index, follow, max-image-preview:large' : path === '/admin' ? 'noindex, nofollow' : 'noindex, follow')
     setMeta('property', 'og:title', title)
     setMeta('property', 'og:description', description)
     setMeta('name', 'twitter:title', title)

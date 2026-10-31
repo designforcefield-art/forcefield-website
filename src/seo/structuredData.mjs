@@ -1,7 +1,8 @@
 /**
  * Schema.org structured data (JSON-LD). Plain JS so both the running site and
- * the build-time page generator (scripts/seo-pages.mjs) can import it. Only facts already stated on the site are used:
- * no prices, ratings or street address.
+ * the build-time page generator (scripts/seo-pages.mjs) can import it.
+ * Only facts visible on the site are used: no ratings, reviews or street address.
+ * Prices must match OFFERINGS in src/data/catalogue.ts (scripts/seo-check.mjs fails the build if not).
  */
 import seo from './pages.json' with { type: 'json' }
 
@@ -19,7 +20,15 @@ export const ORGANIZATION = {
   description:
     'Forcefield Design provides websites and digital solutions for Singapore businesses of every size, from startups to established companies.',
   email: 'support@forcefield.design',
-  telephone: '+65 8083 6840',
+  // The number is published on the site as WhatsApp, so it's a contact point rather than a phone line.
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer support',
+    email: 'support@forcefield.design',
+    telephone: '+65 8083 6840',
+    areaServed: 'SG',
+    availableLanguage: ['English'],
+  },
   address: { '@type': 'PostalAddress', addressCountry: 'SG' },
   areaServed: { '@type': 'Country', name: 'Singapore' },
   knowsAbout: ['Website design', 'E-commerce websites', 'Online booking systems', 'WhatsApp business chat', 'Local SEO', 'Digital transformation for businesses'],
@@ -39,6 +48,9 @@ export const WEBSITE = {
   inLanguage: 'en-SG',
   publisher: { '@id': url('/#organization') },
 }
+
+/** Monthly prices in SGD, as shown on the homepage cards. */
+export const PRICES = { essential: 150, dynamic: 300 }
 
 const AUDIENCE = { '@type': 'BusinessAudience', audienceType: 'Singapore businesses of every size, from startups to established companies' }
 const monthly = (amount) => ({
@@ -64,31 +76,11 @@ export const SERVICES = {
   '@type': 'ItemList',
   name: 'Forcefield Design services',
   itemListElement: [
-    service('Discovery Consultation', 'Workshops that uncover your business challenges and identify the right digital solutions.', '/discovery'),
-    service('Essential Solution', 'A professional 3-page website, fully managed by our team, with preset pages and features for your industry.', '/industries', monthly(150)),
-    service('Dynamic Solution', 'A scalable website with full control, AI SEO tools, customisable features and dedicated support.', '/industries', monthly(300)),
+    // Descriptions mirror the homepage cards.
+    service('Discovery Consultation', 'Through collaborative workshops, we uncover your business challenges, understand your processes, and recommend digital solutions that work for you.', '/discovery'),
+    service('Essential Solution', 'Get your business online without the hassle. We build, manage, and maintain your website so you can focus on what matters.', '/industries', monthly(PRICES.essential)),
+    service('Dynamic Solution', 'A powerful website with smart tools and the flexibility to grow alongside your business.', '/industries', monthly(PRICES.dynamic)),
   ].map((item, i) => ({ '@type': 'ListItem', position: i + 1, item })),
-}
-
-export const INDUSTRIES = [
-  'Food & Beverage',
-  'Beauty & Wellness',
-  'Retail & E-commerce',
-  'Interior Design & Renovation',
-  'Professional Services',
-  'Property & Real Estate',
-  'Education & Training',
-]
-
-export const INDUSTRY_LIST = {
-  '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'Website solutions by industry in Singapore',
-  itemListElement: INDUSTRIES.map((name, i) => ({
-    '@type': 'ListItem',
-    position: i + 1,
-    item: service(`${name} website`, `Website solution for ${name.toLowerCase()} businesses in Singapore.`, '/industries'),
-  })),
 }
 
 export function breadcrumbs(path, label) {
@@ -105,7 +97,7 @@ export function breadcrumbs(path, label) {
 export function structuredDataFor(path, label) {
   const blocks = [ORGANIZATION, WEBSITE, breadcrumbs(path, label)]
   if (path === '/') blocks.push(SERVICES)
-  if (path === '/industries') blocks.push(INDUSTRY_LIST, SERVICES)
+  if (path === '/industries') blocks.push(SERVICES)
   if (path === '/discovery') blocks.push({ '@context': 'https://schema.org', ...SERVICES.itemListElement[0].item })
   return blocks
 }
