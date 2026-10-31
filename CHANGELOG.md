@@ -4,6 +4,7 @@ Each build matches the version number in the published prototype's history.
 
 | Build | Date | Summary |
 |---|---|---|
+| 105 | 2026-10-31 | Industries: View Website Demo buttons get a fading pulse ring like the WhatsApp button (grey, every 4.2 s, second button offset), replacing the static halo rings; embossed dark base and soft glow kept. Off for reduced-motion users. |
 | 104 | 2026-10-31 | Industries: View Website Demo buttons drop the grey rim and go back to the standard embossed dark button, keeping the soft grey halo rings and glow (stronger on hover). |
 | 103 | 2026-10-31 | Industries: View Website Demo buttons restyled in greys: dark base, bright grey rim, two soft halo rings and a faint glow (all stronger on hover), replacing the Build 102 blue glow. More space between the two Dynamic demo buttons so the rings don't touch. |
 | 102 | 2026-10-31 | Industries: View Website Demo buttons go back to the original dark base, replacing the Build 101 gradient, with a blue edge, a soft blue glow (stronger on hover) and a purple arrow. |

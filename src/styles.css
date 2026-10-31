@@ -355,19 +355,29 @@ html body {
   }
 }
 
-/* View Website Demo (Industries): the standard embossed dark button (--shadow-btn)
-   plus soft concentric halo rings and a glow, in greys to match the theme. */
+/* View Website Demo (Industries): the standard embossed dark button with a soft
+   grey glow, plus a ring that pulses outward and fades, like the WhatsApp button.
+   The ring uses a growing box-shadow (not scale) so it stays even on a wide pill. */
 .demo-glow {
-  box-shadow:
-    var(--shadow-btn),
-    0 0 0 5px rgb(255 255 255 / 0.045),
-    0 0 0 10px rgb(255 255 255 / 0.025),
-    0 0 28px 6px rgb(255 255 255 / 0.06);
+  position: relative;
+  box-shadow: var(--shadow-btn), 0 0 24px 4px rgb(255 255 255 / 0.05);
 }
 .demo-glow:hover {
-  box-shadow:
-    var(--shadow-btn),
-    0 0 0 5px rgb(255 255 255 / 0.07),
-    0 0 0 10px rgb(255 255 255 / 0.04),
-    0 0 32px 8px rgb(255 255 255 / 0.09);
+  box-shadow: var(--shadow-btn), 0 0 30px 6px rgb(255 255 255 / 0.09);
+}
+.demo-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  animation: demo-pulse 4.2s ease-out infinite;
+}
+li + li .demo-glow::before { animation-delay: 1.4s; }
+@keyframes demo-pulse {
+  0% { box-shadow: 0 0 0 0 rgb(255 255 255 / 0.2); }
+  70%, 100% { box-shadow: 0 0 0 14px rgb(255 255 255 / 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .demo-glow::before { animation: none; }
 }

@@ -52,7 +52,7 @@ function DemoLinks({ demos, tier }: { demos: IndustryDemos | undefined; tier: Ti
                 rel="noopener"
                 className={cn(
                   pill,
-                  // Standard embossed dark button with soft grey halo rings (styles.css .demo-glow).
+                  // Standard embossed dark button with a soft glow and a fading pulse ring (styles.css .demo-glow).
                   'group demo-glow bg-raised text-fg transition-[background-color,box-shadow] duration-300 outline-none hover:bg-raised-hover focus-visible:ring-2 focus-visible:ring-electric/60',
                 )}
               >
