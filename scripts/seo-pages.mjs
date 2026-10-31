@@ -1,6 +1,6 @@
 /**
  * Post-build SEO step (runs after `vite build`):
- *  - writes a static HTML file per page (dist/about/index.html, …) with that
+ *  - writes a static HTML file per page (dist/about.html, …) with that
  *    page's title, description, canonical URL, social tags and JSON-LD
  *  - writes sitemap.xml, robots.txt and Cloudflare Pages _redirects
  * Set SITE_URL to override the domain in pages.json (e.g. a staging domain).
@@ -48,17 +48,35 @@ function head(page) {
 
 const render = (page) => template.replace(/<!--seo:start-->[\s\S]*?<!--seo:end-->/, head(page))
 
+// Cloudflare Pages serves /about from about.html with no redirect (and 308-redirects /about/ to /about).
+// A folder file (about/index.html) would instead redirect /about to /about/, which wouldn't match the
+// canonical URL, so each page is written as <name>.html.
 for (const page of seo.pages) {
   if (page.path !== '/' && hashMode) continue // hash URLs: only the home page file exists
-  const file = page.path === '/' ? join(DIST, 'index.html') : join(DIST, page.path.slice(1), 'index.html')
+  const file = page.path === '/' ? join(DIST, 'index.html') : join(DIST, `${page.path.slice(1)}.html`)
   mkdirSync(dirname(file), { recursive: true })
   writeFileSync(file, render(page))
+}
+
+// Pages that must not be indexed: no canonical, no structured data, robots noindex.
+// - admin.html: the admin page, served at /admin.
+// - 404.html: any unknown address. Cloudflare Pages returns it with a real 404 status (instead of
+//   the home page with a home canonical), and the app still renders client-side from it.
+const noindexHead = (title, description) => `<!--seo:start-->
+    <title>${esc(title)}</title>
+    <meta name="description" content="${esc(description)}" />
+    <meta name="robots" content="noindex, nofollow" />
+    <!--seo:end-->`
+if (!hashMode) {
+  writeFileSync(join(DIST, 'admin.html'), template.replace(/<!--seo:start-->[\s\S]*?<!--seo:end-->/, noindexHead('Admin | Forcefield Design', 'Forcefield Design admin.')))
+  writeFileSync(join(DIST, '404.html'), template.replace(/<!--seo:start-->[\s\S]*?<!--seo:end-->/, noindexHead(seo.noindex.title, seo.noindex.description)))
 }
 
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${seo.pages
-  .map((p) => `  <url>\n    <loc>${abs(p.path)}</loc>\n    <lastmod>${today}</lastmod>\n    <priority>${p.priority}</priority>\n  </url>`)
+  // lastmod = when the page's content last changed (set in pages.json), not the build date.
+  .map((p) => `  <url>\n    <loc>${abs(p.path)}</loc>\n    <lastmod>${p.lastmod || today}</lastmod>\n  </url>`)
   .join('\n')}
 </urlset>
 `
@@ -70,4 +88,4 @@ writeFileSync(
   join(DIST, '_redirects'),
   ['/contact /get-started 301', '/finder /solutions 301', '/industries/* /industries 301'].join('\n') + '\n',
 )
-console.log(`SEO: ${hashMode ? 1 : seo.pages.length} page file(s), sitemap, robots.txt, _redirects for ${SITE}`)
+console.log(`SEO: ${hashMode ? 1 : seo.pages.length} page file(s)${hashMode ? '' : ' + admin/404'}, sitemap, robots.txt, _redirects for ${SITE}`)

@@ -1,5 +1,5 @@
 {
-  "siteUrl": "https://www.forcefield.design",
+  "siteUrl": "https://forcefield.design",
   "siteName": "Forcefield Design",
   "ogImage": "/og-image.png",
   "pages": [
@@ -8,42 +8,42 @@
       "label": "Home",
       "title": "Digital Solutions for Singapore Businesses | Forcefield Design",
       "description": "Websites, online booking, e-commerce and AI SEO tools for Singapore businesses of every size, from startups to established firms. Fully managed for you.",
-      "priority": "1.0"
+      "lastmod": "2026-10-31"
     },
     {
       "path": "/solutions",
       "label": "Solutions",
       "title": "Digital Tools for Singapore Businesses | Forcefield Design",
       "description": "Browse 86 ready-to-deploy digital solutions, from online booking and e-commerce to WhatsApp chat and SEO, for Singapore businesses in every industry.",
-      "priority": "0.9"
+      "lastmod": "2026-10-31"
     },
     {
       "path": "/industries",
       "label": "Industries",
       "title": "Website Solutions by Industry in Singapore | Forcefield Design",
       "description": "Ready-made website solutions for Singapore F&B, beauty & wellness, retail, interior design, property, education and professional services, with demos.",
-      "priority": "0.9"
+      "lastmod": "2026-10-31"
     },
     {
       "path": "/discovery",
       "label": "Discovery",
       "title": "Discovery Consultation in Singapore | Forcefield Design",
       "description": "Not sure what your business needs online? Our Discovery workshops in Singapore map your challenges and recommend the right digital solutions.",
-      "priority": "0.8"
+      "lastmod": "2026-10-31"
     },
     {
       "path": "/about",
       "label": "About",
       "title": "About Forcefield Design | Singapore Digital Solutions Partner",
       "description": "Forcefield Design began as a Singapore design studio. Today we help businesses of every size get online and grow with practical digital solutions.",
-      "priority": "0.6"
+      "lastmod": "2026-10-31"
     },
     {
       "path": "/get-started",
       "label": "Get Started",
       "title": "Get Started or Contact Us | Forcefield Design Singapore",
       "description": "Tell us about your business and we'll set up the right website and tools. Reach Forcefield Design in Singapore by form, WhatsApp or email.",
-      "priority": "0.8"
+      "lastmod": "2026-10-31"
     }
   ],
   "noindex": {

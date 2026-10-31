@@ -706,7 +706,7 @@ export const SITE = {
   instagram: 'https://www.instagram.com/forcefield.design/',
   facebook: 'https://www.facebook.com/profile.php?id=61577197974708',
   linkedin: 'https://www.linkedin.com/company/askforcefield/',
-  legacySite: 'https://www.forcefield.design/',
+  legacySite: 'https://forcefield.design/',
 }
 
 /* ------------------------------------------------------------------ */

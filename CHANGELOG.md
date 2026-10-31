@@ -4,6 +4,7 @@ Each build matches the version number in the published prototype's history.
 
 | Build | Date | Summary |
 |---|---|---|
+| 96 | 2026-10-31 | SEO domain consistency: primary domain is https://forcefield.design (no www) for canonical URLs, Open Graph URLs, JSON-LD (organisation, website, breadcrumbs, services), sitemap and robots.txt. Page files are now written as about.html etc. so /about is served without a redirect and matches its canonical. Sitemap uses real content dates (lastmod per page) and drops priority values. No visible changes. |
 | 95 | 2026-10-31 | Home solution cards: new Essential and Dynamic copy, prices (S$150/month, S$300/month; Discovery "Quoted separately"), a "What's included" label above each list, and arrows on the Explore buttons. Prices added to the Essential/Dynamic structured data (SGD, monthly). |
 | 94 | 2026-10-31 | SEO retargeted to the Singapore market, any business size: page titles and descriptions name Singapore and "businesses of every size" (no SME-only wording); structured data back to Singapore (area served, audience, en-SG); og:locale en_SG; share image text updated. |
 | 93 | 2026-10-31 | SEO retargeted from Singapore to a global audience of every business size: new page titles and descriptions, structured data (served worldwide, audience "businesses of every size"), page language "en", Open Graph locale en_US, share image text updated. |

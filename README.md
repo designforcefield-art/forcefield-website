@@ -137,9 +137,12 @@ The site uses relative paths and hash URLs (`/#/about`), so it works at
 
 - Page titles, descriptions and keywords live in `src/seo/pages.json`; structured data in `src/seo/structuredData.mjs`.
 - `npm run build` runs `scripts/seo-pages.mjs`, which writes a static HTML file per page with its own
-  title, description, canonical URL, social tags and JSON-LD, plus `sitemap.xml`, `robots.txt` and
+  title, description, canonical URL, social tags and JSON-LD (as `about.html` etc., so `/about`
+  is served without a redirect), plus `sitemap.xml`, `robots.txt` and
   Cloudflare `_redirects`.
-- The canonical domain is `siteUrl` in `pages.json` (https://www.forcefield.design). Override for a
+- The canonical domain is `siteUrl` in `pages.json` (https://forcefield.design, no www; Cloudflare redirects www to it).
+  Each page's `lastmod` in `pages.json` is the date its content last changed: update it when you edit that page.
+  Override the domain for a
   staging build with `SITE_URL=https://… npm run build`.
 - After launch: add the domain in Google Search Console and submit `/sitemap.xml`.
 
