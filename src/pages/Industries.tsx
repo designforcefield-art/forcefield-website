@@ -40,7 +40,7 @@ function DemoLinks({ demos, tier }: { demos: IndustryDemos | undefined; tier: Ti
   if (!links.length)
     return <p className={cn(pill, 'justify-center border border-dashed border-line-strong text-subtle')}>Demo Coming Soon</p>
   return (
-    <ul className="flex flex-col gap-2 sm:flex-row">
+    <ul className="flex flex-col gap-6 py-1 sm:flex-row">
       {links.map((l) => {
         const href = demoUrl(demos![l.key]!)
         return (
@@ -52,12 +52,12 @@ function DemoLinks({ demos, tier }: { demos: IndustryDemos | undefined; tier: Ti
                 rel="noopener"
                 className={cn(
                   pill,
-                  // Original dark button with a soft blue glow; the glow strengthens on hover.
-                  'group demo-glow border border-electric/45 bg-raised text-fg transition-[background-color,border-color,box-shadow] duration-300 outline-none hover:border-electric/80 hover:bg-raised-hover focus-visible:ring-2 focus-visible:ring-electric/60',
+                  // Dark button with a bright grey rim and soft halo rings (styles.css .demo-glow).
+                  'group demo-glow border-2 border-white/35 bg-raised text-fg transition-[background-color,border-color,box-shadow] duration-300 outline-none hover:border-white/55 hover:bg-raised-hover focus-visible:ring-2 focus-visible:ring-electric/60',
                 )}
               >
                 {l.label}
-                <ArrowRight className="size-4 text-glow transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
+                <ArrowRight className="size-4 text-muted transition-[color,transform] group-hover:text-fg duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
             ) : (
