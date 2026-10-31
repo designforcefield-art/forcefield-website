@@ -645,8 +645,15 @@ export interface Offering {
   features: string[]
   /** Monthly price (confirmed by Forcefield, 31 Oct 2026). Omitted when quoted per project. */
   price?: { amount: string; period: string }
+  /** Short terms shown under the price: a highlight line, then fine print. */
+  priceNotes?: { highlight: string; fineprint: string }
   cta: { label: string; to: string }
   recommended?: boolean
+}
+
+const PRICE_NOTES = {
+  highlight: 'S$0 setup fee · Domain & hosting included',
+  fineprint: 'Excl. applicable payment processing fees.',
 }
 
 export const OFFERINGS: Offering[] = [
@@ -670,7 +677,14 @@ export const OFFERINGS: Offering[] = [
     headline: 'We handle everything.',
     description: 'Get your business online without the hassle. We build, manage, and maintain your website so you can focus on what matters.',
     price: { amount: 'S$150', period: '/month' },
-    features: ['Professional 3-page website', 'Industry-specific preset design', 'Done-for-you website management', 'Hosting, maintenance & support'],
+    priceNotes: PRICE_NOTES,
+    features: [
+      'Professional 3-page website',
+      'Industry-specific preset design',
+      'Done-for-you website management',
+      'Domain, hosting & maintenance included',
+      'Ongoing support',
+    ],
     // Industry cards show the Essential and Dynamic demo websites.
     cta: { label: 'Explore Essential', to: '/industries' },
   },
@@ -680,11 +694,13 @@ export const OFFERINGS: Offering[] = [
     headline: 'Take control. Grow further.',
     description: 'A powerful website with smart tools and the flexibility to grow alongside your business.',
     price: { amount: 'S$300', period: '/month' },
+    priceNotes: PRICE_NOTES,
     features: [
       'Flexible, scalable website',
       'Industry-specific preset design',
       'Easy-to-use admin panel',
       'AI-powered SEO tools',
+      'Domain, hosting & maintenance included',
       'Smart integrations & dedicated support',
     ],
     // No Dynamic details page exists yet: the solutions list lets visitors pick Dynamic per solution.

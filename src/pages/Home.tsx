@@ -149,16 +149,24 @@ function Packages() {
               <h3 className="mt-6 text-card-title font-normal">{o.headline}</h3>
               <p className="mt-2 text-card-body text-muted">{o.description}</p>
               {/* Price row (Discovery is quoted per project) */}
-              <p className="mt-6 flex items-baseline gap-1 lg:self-end">
-                {o.price ? (
+              <div className="mt-6 lg:self-end">
+                <p className="flex items-baseline gap-1">
+                  {o.price ? (
+                    <>
+                      <span className="text-[2rem] leading-none font-normal tracking-[-0.02em] text-fg tabular-nums [font-family:var(--font-display)]">{o.price.amount}</span>
+                      <span className="text-sm text-muted">{o.price.period}</span>
+                    </>
+                  ) : (
+                    <span className="text-base text-muted">Quoted separately</span>
+                  )}
+                </p>
+                {o.priceNotes && (
                   <>
-                    <span className="text-[2rem] leading-none font-normal tracking-[-0.02em] text-fg tabular-nums [font-family:var(--font-display)]">{o.price.amount}</span>
-                    <span className="text-sm text-muted">{o.price.period}</span>
+                    <p className="mt-3 text-sm text-fg/80">{o.priceNotes.highlight}</p>
+                    <p className="mt-1 text-xs text-subtle">{o.priceNotes.fineprint}</p>
                   </>
-                ) : (
-                  <span className="text-base text-muted">Quoted separately</span>
                 )}
-              </p>
+              </div>
               <div className="mt-6 w-full border-t border-line pt-6">
                 <p className="text-xs font-medium text-subtle">What's included</p>
                 <ul className="mt-3 flex flex-col gap-3">
