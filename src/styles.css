@@ -355,28 +355,10 @@ html body {
   }
 }
 
-/* View Website Demo (Industries): the standard embossed dark button with a soft
-   grey glow, plus a ring that pulses outward and fades, like the WhatsApp button.
-   The ring uses a growing box-shadow (not scale) so it stays even on a wide pill. */
+/* View Website Demo (Industries): the standard embossed dark button. */
 .demo-glow {
   position: relative;
-  box-shadow: var(--shadow-btn), 0 0 20px 2px rgb(255 255 255 / 0.03);
-}
-.demo-glow:hover {
-  box-shadow: var(--shadow-btn), 0 0 24px 4px rgb(255 255 255 / 0.055);
-}
-.demo-glow::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  animation: demo-pulse 4.2s ease-out infinite;
-}
-li + li .demo-glow::before { animation-delay: 1.4s; }
-@keyframes demo-pulse {
-  0% { box-shadow: 0 0 0 0 rgb(255 255 255 / 0.1); }
-  70%, 100% { box-shadow: 0 0 0 10px rgb(255 255 255 / 0); }
+  box-shadow: var(--shadow-btn);
 }
 /* A light catching the top edge, played once each time an industry card opens.
    .demo-edge paints only the 1px border ring (mask); .demo-halo is the soft light above it. */
@@ -412,5 +394,5 @@ li + li .demo-glow::before { animation-delay: 1.4s; }
   100% { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .demo-glow::before, [data-expanded='true'] .demo-edge, [data-expanded='true'] .demo-halo { animation: none; }
+  [data-expanded='true'] .demo-edge, [data-expanded='true'] .demo-halo { animation: none; }
 }
