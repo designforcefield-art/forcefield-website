@@ -52,11 +52,12 @@ function DemoLinks({ demos, tier }: { demos: IndustryDemos | undefined; tier: Ti
                 rel="noopener"
                 className={cn(
                   pill,
-                  'bg-raised text-fg shadow-btn transition-colors outline-none hover:bg-raised-hover focus-visible:ring-2 focus-visible:ring-electric/60',
+                  // Soft blue-to-purple tint: stands out from the cards, stays quieter than the solid primary buttons.
+                  'group border border-electric/40 bg-linear-to-r from-electric/35 to-[#7b4dff]/20 text-fg shadow-btn transition-[border-color,--tw-gradient-from,--tw-gradient-to] duration-300 outline-none hover:border-electric/70 hover:from-electric/55 hover:to-[#7b4dff]/35 focus-visible:ring-2 focus-visible:ring-electric/60',
                 )}
               >
                 {l.label}
-                <ArrowRight className="size-4 text-subtle" aria-hidden="true" />
+                <ArrowRight className="size-4 text-glow transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
                 <span className="sr-only">(opens in a new tab)</span>
               </a>
             ) : (

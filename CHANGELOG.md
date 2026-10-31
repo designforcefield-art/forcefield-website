@@ -4,6 +4,7 @@ Each build matches the version number in the published prototype's history.
 
 | Build | Date | Summary |
 |---|---|---|
+| 101 | 2026-10-31 | Industries: View Website Demo buttons get a soft blue-to-purple gradient, a faint blue edge and a purple arrow, so they stand out more while staying quieter than the main buttons. |
 | 100 | 2026-10-31 | Mobile menu: removed the duplicate Discovery Consultation link under Solutions. |
 | 99 | 2026-10-31 | Contact Us links now open the contact page on the Get Started tab (General Enquiry is one click away, or via ?tab=enquiry). |
 | 98 | 2026-10-31 | Home solution cards: Essential and Dynamic now show "S$0 setup fee · Domain & hosting included" and "Excl. applicable payment processing fees." under the price. Essential list: "Domain, hosting & maintenance included" and "Ongoing support" replace "Hosting, maintenance & support". Dynamic list adds "Domain, hosting & maintenance included". |
