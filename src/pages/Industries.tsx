@@ -52,8 +52,8 @@ function DemoLinks({ demos, tier }: { demos: IndustryDemos | undefined; tier: Ti
                 rel="noopener"
                 className={cn(
                   pill,
-                  // Soft blue-to-purple tint: stands out from the cards, stays quieter than the solid primary buttons.
-                  'group border border-electric/40 bg-linear-to-r from-electric/35 to-[#7b4dff]/20 text-fg shadow-btn transition-[border-color,--tw-gradient-from,--tw-gradient-to] duration-300 outline-none hover:border-electric/70 hover:from-electric/55 hover:to-[#7b4dff]/35 focus-visible:ring-2 focus-visible:ring-electric/60',
+                  // Original dark button with a soft blue glow; the glow strengthens on hover.
+                  'group demo-glow border border-electric/45 bg-raised text-fg transition-[background-color,border-color,box-shadow] duration-300 outline-none hover:border-electric/80 hover:bg-raised-hover focus-visible:ring-2 focus-visible:ring-electric/60',
                 )}
               >
                 {l.label}
@@ -115,7 +115,8 @@ function IndustryCard({ ind, expanded, onToggle }: { ind: Industry; expanded: bo
           expanded ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0',
         )}
       >
-        <div className="overflow-hidden">
+        {/* Negative margin + padding: the clip edge sits at the card edge, so the demo button glow isn't cut off. */}
+        <div className="-mx-6 overflow-hidden px-6 sm:-mx-7 sm:px-7">
           <div className="mt-6 flex flex-col gap-4 border-y border-line py-6">
             <p className="text-sm font-medium text-fg">Choose your solution</p>
             <div

@@ -4,6 +4,7 @@ Each build matches the version number in the published prototype's history.
 
 | Build | Date | Summary |
 |---|---|---|
+| 102 | 2026-10-31 | Industries: View Website Demo buttons go back to the original dark base, replacing the Build 101 gradient, with a blue edge, a soft blue glow (stronger on hover) and a purple arrow. |
 | 101 | 2026-10-31 | Industries: View Website Demo buttons get a soft blue-to-purple gradient, a faint blue edge and a purple arrow, so they stand out more while staying quieter than the main buttons. |
 | 100 | 2026-10-31 | Mobile menu: removed the duplicate Discovery Consultation link under Solutions. |
 | 99 | 2026-10-31 | Contact Us links now open the contact page on the Get Started tab (General Enquiry is one click away, or via ?tab=enquiry). |
