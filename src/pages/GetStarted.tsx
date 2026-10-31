@@ -42,15 +42,18 @@ type Tab = 'signup' | 'enquiry'
 
 /**
  * Combined Sign Up & Enquiry page.
- *  /get-started            → Get Started tab (?service=discovery|essential|dynamic preselects)
- *  /contact                → General Enquiry tab
+ *  /get-started, /contact  → Get Started tab (?service=discovery|essential|dynamic preselects)
+ *  ?tab=enquiry            → General Enquiry tab
  * Both forms stay mounted, so switching tabs keeps what the visitor entered.
  */
 export default function GetStarted() {
-  const { pathname } = useLocation()
+  const { key } = useLocation()
   const [params] = useSearchParams()
-  const initialTab: Tab = params.get('tab') === 'enquiry' || (pathname.startsWith('/contact') && params.get('tab') !== 'signup') ? 'enquiry' : 'signup'
+  // Get Started is the default tab, including for the Contact Us links.
+  const initialTab: Tab = params.get('tab') === 'enquiry' ? 'enquiry' : 'signup'
   const [tab, setTab] = useState<Tab>(initialTab)
+  // A new navigation (e.g. clicking Contact Us while already here) resets the tab.
+  useEffect(() => setTab(initialTab), [key]) // eslint-disable-line react-hooks/exhaustive-deps
   const tabIds = { signup: 'tab-signup', enquiry: 'tab-enquiry' }
   const panelIds = { signup: 'panel-signup', enquiry: 'panel-enquiry' }
   const tabs: { id: Tab; label: string }[] = [
