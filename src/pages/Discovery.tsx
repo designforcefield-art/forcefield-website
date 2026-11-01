@@ -144,13 +144,11 @@ export default function Discovery() {
 
       {/* Your Discovery Outcome */}
       <Section id="outcome-title">
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
-          <SectionIntro label="Your Discovery outcome" id="outcome-title" title="Clarity today. A better direction tomorrow." />
-          <div className="flex flex-col gap-4 text-body-lg text-muted lg:pt-11">
-            <p>You'll leave with practical next steps, not just a conversation.</p>
-            <p className="text-fg">Depending on the agreed workshop scope, you'll receive:</p>
-          </div>
-        </div>
+        <SectionIntro label="Your Discovery outcome" id="outcome-title" title="Clarity today. A better direction tomorrow.">
+          <p className="text-lead text-muted">
+            You'll leave with practical next steps, not just a conversation. Depending on the agreed workshop scope, you'll receive:
+          </p>
+        </SectionIntro>
         <ul className="grid gap-3 md:grid-cols-3">
           {OUTCOMES.map(({ icon: I, title, body }) => (
             <li key={title} className="flex h-full flex-col gap-4 rounded-panel border border-line bg-surface p-6 sm:p-8">

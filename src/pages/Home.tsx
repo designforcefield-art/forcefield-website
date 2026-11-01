@@ -26,12 +26,10 @@ function Hero() {
           <h1 className="max-w-5xl text-h1 font-normal">
             Digital solutions <span className="text-gradient">for every stage of business.</span>
           </h1>
-          <div className="flex max-w-[40rem] flex-col gap-3">
-            <p className="text-lead text-fg">Professional websites, practical business tools, and ongoing support.</p>
-            <p className="text-muted">
-              Whether you're getting online for the first time or ready to do more, we'll help you choose what fits.
-            </p>
-          </div>
+          <p className="max-w-[40rem] text-lead text-muted">
+            <span className="text-fg">Professional websites, practical business tools, and ongoing support.</span>{' '}
+            Whether you're getting online for the first time or ready to do more, we'll help you choose what fits.
+          </p>
           <div className="flex flex-col gap-3 xs:flex-row">
             <ButtonLink to="/solutions" size="lg">Explore Our Solutions</ButtonLink>
           </div>
