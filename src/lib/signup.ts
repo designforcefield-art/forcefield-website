@@ -28,8 +28,8 @@ export const SERVICE_CARDS: { id: ServiceId; name: string; headline: string; des
   {
     id: 'discovery',
     name: 'Discovery',
-    headline: 'Find the right solution',
-    description: 'Workshops to uncover your business challenges and identify the right digital solutions.',
+    headline: 'Find your direction',
+    description: 'Guided workshops to clarify your challenges and recommend practical solutions.',
   },
   {
     id: 'essential',
@@ -40,8 +40,8 @@ export const SERVICE_CARDS: { id: ServiceId; name: string; headline: string; des
   {
     id: 'dynamic',
     name: 'Dynamic',
-    headline: 'Build, manage & grow',
-    description: 'A scalable website with full control, AI SEO tools, and dedicated support.',
+    headline: 'More control, room to grow',
+    description: 'A scalable website you manage, with AI SEO tools and dedicated support.',
   },
 ]
 

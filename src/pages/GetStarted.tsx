@@ -74,7 +74,7 @@ export default function GetStarted() {
         <SectionHeading
           as="h1"
           title="Let's get started."
-          lead="Sign up, or reach out to us. We'll review your details and get back to you."
+          lead="Choose a solution, or send us a general enquiry. We'll review your details and reply with next steps."
         />
         {(SITE.email || SITE.phone) && (
           <dl className="flex flex-col gap-3 text-sm">
@@ -256,12 +256,12 @@ function GetStartedForm({ initialService, fromMyPick }: { initialService: string
         <span className="grid size-16 animate-pop place-items-center rounded-full bg-success/15 text-success">
           <CheckCircle2 className="size-8" aria-hidden="true" />
         </span>
-        <h2 className="text-h3 font-normal">Thanks, {f.name.split(' ')[0]}. You're signed up.</h2>
+        <h2 className="text-h3 font-normal">Thanks, {f.name.split(' ')[0]}. We've received your request.</h2>
         <p className="max-w-md text-muted">
-          We'll review your details for {SERVICE_CARDS.find((s) => s.id === f.service)?.name} and get in touch to confirm the next steps.
-          {result.reference && <> Your reference is <span className="font-mono text-fg">{result.reference}</span>.</>}
+          We'll review your details for {SERVICE_CARDS.find((s) => s.id === f.service)?.name} and contact you about the next steps. No payment is taken through this form.
         </p>
-        <Button variant="secondary" onClick={reset}>Start a new sign-up</Button>
+        {result.reference && <p className="text-sm text-muted">Your reference: <span className="font-mono text-fg">{result.reference}</span></p>}
+        <Button variant="secondary" onClick={reset}>Start a new request</Button>
       </div>
     )
 

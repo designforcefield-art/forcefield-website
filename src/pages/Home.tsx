@@ -27,9 +27,9 @@ function Hero() {
             Digital solutions <span className="text-gradient">for every stage of business.</span>
           </h1>
           <div className="flex max-w-[40rem] flex-col gap-3">
-            <p className="text-lead text-fg">From getting started to scaling up, we make going digital effortless.</p>
+            <p className="text-lead text-fg">Professional websites, practical business tools, and ongoing support.</p>
             <p className="text-muted">
-              Professional websites, smart tools, and dedicated support, all tailored to your business needs, so you can focus on what matters most.
+              Whether you're getting online for the first time or ready to do more, we'll help you choose what fits.
             </p>
           </div>
           <div className="flex flex-col gap-3 xs:flex-row">
@@ -44,16 +44,16 @@ function Hero() {
 
 const STEPS_SIMPLE: { title: string; body: string }[] = [
   {
-    title: 'Tell us about your business',
-    body: "Choose a solution and share your business needs. Not sure where to start? We'll guide you.",
+    title: 'Choose & get started',
+    body: "Choose Essential or Dynamic, share your business details, and make your first month's payment.",
   },
   {
-    title: 'We build & set up',
-    body: 'From design to technical setup, our team takes care of everything and gets your website ready to launch.',
+    title: 'We build, you review',
+    body: 'Our team builds your website. You preview it, test the features, and tell us what to change.',
   },
   {
     title: 'Launch & grow',
-    body: 'Your website goes live! Manage it yourself or leave it to us, with dedicated support as your business grows.',
+    body: 'Once you approve your website, we launch it and keep supporting you, based on your plan.',
   },
 ]
 
@@ -65,12 +65,12 @@ function ThreeSteps() {
           align="center"
           title={
             <span id="steps-title">
-              <span className="whitespace-nowrap">Three simple steps.</span>
+              <span className="whitespace-nowrap">From sign-up to launch.</span>
               <br />
-              <span className="text-gradient">Zero hassle.</span>
+              <span className="text-gradient">Made simple.</span>
             </span>
           }
-          lead="Tell us about your business. We'll handle the rest."
+          lead="Know what you need? Choose Essential or Dynamic, and we'll guide you through each step."
         />
         <ol className="grid gap-3 md:grid-cols-3">
           {STEPS_SIMPLE.map((st, i) => (
@@ -102,7 +102,7 @@ function FeaturedTools() {
         <SectionHeading
           align="center"
           title={<span id="tools-title">Digital tools that work for your business.</span>}
-          lead="From customer enquiries and online bookings to payments and marketing, explore practical features that make running your business easier."
+          lead="Practical tools for enquiries, bookings, payments and marketing. Add the ones you need to My Pick, and we'll confirm what your plan covers."
         />
         <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {getFeaturedSolutions().map((t) => (
@@ -126,7 +126,7 @@ function Packages() {
         <SectionHeading
           align="center"
           title={<span id="packages-title">The right solution for every business.</span>}
-          lead="Whether you're looking to solve business challenges, establish your online presence, or scale your digital capabilities, we've got you covered."
+          lead="Three ways to work with us, each for a different need. Choose the one that fits your business today."
         />
         <ul className="mx-auto grid w-full max-w-xl gap-3 lg:max-w-none lg:grid-cols-3 lg:gap-y-0">
           {OFFERINGS.map((o) => (
@@ -202,9 +202,9 @@ function LaunchCta() {
         <div className="relative overflow-hidden rounded-[2rem] border border-line bg-surface px-6 py-14 text-center sm:px-12 sm:py-20">
           <div className="relative mx-auto flex max-w-2xl flex-col items-center gap-5">
             <span className="grid size-11 place-items-center rounded-xl bg-elevated text-fg shadow-rim"><Rocket className="size-6" aria-hidden="true" /></span>
-            <h2 id="launch-title" className="text-h2 font-normal">Ready to launch your website?</h2>
+            <h2 id="launch-title" className="text-h2 font-normal">Ready to take the next step?</h2>
             <p className="text-lead text-muted">
-              Tell us about your business, and we'll take care of the setup so you can focus on what matters.
+              Tell us what your business needs. We'll help you find the right solution.
             </p>
             <ButtonLink to="/get-started" className="mt-2">
               Get Started <ArrowRight className="size-4" aria-hidden="true" />

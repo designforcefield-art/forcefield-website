@@ -32,8 +32,8 @@ const STAGES: Stage[] = [
     name: 'Discovery',
     heading: 'Find your direction.',
     description:
-      'Not sure where to begin? Through guided workshops, we uncover your challenges, understand your processes, and recommend practical digital solutions.',
-    bestFor: 'Businesses seeking clarity before investing in digital solutions.',
+      'Not sure where to begin? Through guided workshops, we help you understand your challenges and identify practical digital solutions.',
+    bestFor: 'Businesses that want clarity before investing in digital solutions.',
     cta: 'Explore Discovery',
     to: '/discovery',
   },
@@ -43,7 +43,7 @@ const STAGES: Stage[] = [
     name: 'Essential',
     heading: 'Get online, hassle-free.',
     description:
-      'Launch a professional 3-page website, set up and fully managed by our team. Focus on running your business while we take care of the technical details.',
+      'A professional 3-page website, set up and managed by our team, so you can focus on running your business.',
     bestFor: 'Businesses that want a professional online presence without managing a website themselves.',
     cta: 'Explore Essential',
     to: '/industries',
@@ -54,7 +54,7 @@ const STAGES: Stage[] = [
     name: 'Dynamic',
     heading: 'More control. More possibilities.',
     description:
-      'Take control of your website with an admin panel, AI SEO tools, and the flexibility to expand your digital capabilities as your business grows.',
+      'Manage your own website with an admin panel and AI SEO tools, with room to add more as your business grows.',
     bestFor: 'Businesses that want greater control, flexibility, and room to grow.',
     cta: 'Explore Dynamic',
     to: '/industries',

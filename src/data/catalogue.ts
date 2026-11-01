@@ -662,7 +662,7 @@ export const OFFERINGS: Offering[] = [
     name: 'Discovery',
     headline: 'Find your direction.',
     description:
-      'Through collaborative workshops, we uncover your business challenges, understand your processes, and recommend digital solutions that work for you.',
+      'Not sure where to start? Through guided workshops, we help you understand your challenges and identify practical digital solutions.',
     features: [
       'Guided business discovery workshops',
       'Identify challenges and pain points',
@@ -675,7 +675,7 @@ export const OFFERINGS: Offering[] = [
     id: 'essential',
     name: 'Essential',
     headline: 'We handle everything.',
-    description: 'Get your business online without the hassle. We build, manage, and maintain your website so you can focus on what matters.',
+    description: 'Get your business online with a professional website, fully managed and maintained by our team.',
     price: { amount: 'S$150', period: '/month' },
     priceNotes: PRICE_NOTES,
     features: [
@@ -692,7 +692,7 @@ export const OFFERINGS: Offering[] = [
     id: 'dynamic',
     name: 'Dynamic',
     headline: 'Take control. Grow further.',
-    description: 'A powerful website with smart tools and the flexibility to grow alongside your business.',
+    description: 'Manage your website with greater flexibility, smarter tools, and room to expand as your business grows.',
     price: { amount: 'S$300', period: '/month' },
     priceNotes: PRICE_NOTES,
     features: [

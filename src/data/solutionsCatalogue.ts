@@ -135,7 +135,7 @@ const RAW: Raw[] = [
   t('showcase', 'Photo Gallery', 'Show off your products, services and completed projects in a clean, easy-to-browse gallery.', ['photos', 'gallery', 'images', 'pictures'], { featured: 3 }),
   t('showcase', 'Video Gallery', 'Share videos that explain your business quickly and keep visitors on your website longer.', ['video', 'youtube', 'clips']),
   t('showcase', 'Instagram Feed', 'Display your latest Instagram posts on your website, updating automatically whenever you post.', ['instagram', 'social', 'feed', 'posts'], { third: true }),
-  t('showcase', 'Customer Reviews', 'Display positive reviews and star ratings that help new customers trust your business.', ['reviews', 'ratings', 'stars', 'feedback']),
+  t('showcase', 'Customer Reviews', 'Show customer reviews and star ratings that help new visitors trust your business.', ['reviews', 'ratings', 'stars', 'feedback']),
   t('showcase', 'Portfolio Showcase', 'Present your best completed projects with photos and short notes that prove your experience.', ['portfolio', 'projects', 'past work', 'case studies']),
   t('showcase', 'Services Listing', 'List the services you offer clearly, so customers know exactly what you can do for them.', ['services', 'list', 'menu', 'prices']),
   t('showcase', 'Team Profiles', 'Introduce the people behind your business and build trust before customers even meet you.', ['team', 'staff', 'about', 'people']),
@@ -146,7 +146,7 @@ const RAW: Raw[] = [
   /* ---------- C. Bookings ---------- */
   t('bookings', 'Online Booking', 'Let customers book appointments online any time, with fewer calls and back-and-forth messages.', ['booking', 'appointment', 'schedule', 'reserve'], { featured: 2 }),
   t('bookings', 'Table Reservations', 'Diners reserve a table online in seconds, helping you plan seating and staff ahead.', ['table', 'reservation', 'restaurant', 'dining', 'cafe']),
-  t('bookings', 'Class Booking', 'Customers book their place in classes or workshops online, and classes never get overbooked.', ['class', 'workshop', 'session']),
+  t('bookings', 'Class Booking', 'Customers book their place in classes or workshops online, with limited spots so classes don’t get overbooked.', ['class', 'workshop', 'session']),
   t('bookings', 'Event Registration', 'Visitors sign up for your events online, and every attendee’s details are kept in one place.', ['event', 'registration', 'sign up', 'rsvp']),
   t('bookings', 'Booking Calendar', 'Show your available dates and times, so customers only pick slots that suit you.', ['calendar', 'availability', 'slots', 'dates']),
   t('bookings', 'Booking Confirmation', 'Customers receive an instant email confirming their booking, so they know it went through.', ['confirmation', 'email', 'receipt']),

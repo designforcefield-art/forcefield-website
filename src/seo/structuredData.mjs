@@ -77,9 +77,9 @@ export const SERVICES = {
   name: 'Forcefield Design services',
   itemListElement: [
     // Descriptions mirror the homepage cards.
-    service('Discovery Consultation', 'Through collaborative workshops, we uncover your business challenges, understand your processes, and recommend digital solutions that work for you.', '/discovery'),
-    service('Essential Solution', 'Get your business online without the hassle. We build, manage, and maintain your website so you can focus on what matters.', '/industries', monthly(PRICES.essential)),
-    service('Dynamic Solution', 'A powerful website with smart tools and the flexibility to grow alongside your business.', '/industries', monthly(PRICES.dynamic)),
+    service('Discovery Consultation', 'Through guided workshops, we help you understand your challenges and identify practical digital solutions. A paid service, quoted separately.', '/discovery'),
+    service('Essential Solution', 'Get your business online with a professional website, fully managed and maintained by our team.', '/industries', monthly(PRICES.essential)),
+    service('Dynamic Solution', 'Manage your website with greater flexibility, smarter tools, and room to expand as your business grows.', '/industries', monthly(PRICES.dynamic)),
   ].map((item, i) => ({ '@type': 'ListItem', position: i + 1, item })),
 }
 

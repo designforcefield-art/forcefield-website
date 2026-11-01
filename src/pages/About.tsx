@@ -15,20 +15,20 @@ function Section({ id, children, className }: { id: string; children: ReactNode;
 
 const PRINCIPLES = [
   {
-    title: 'Understand before we build',
-    body: 'We take time to understand your business, challenges, and goals before recommending solutions.',
+    title: 'Understand first',
+    body: 'We learn how your business works before we recommend anything.',
   },
   {
-    title: 'Keep things practical',
-    body: 'We use ready-made designs and proven solutions wherever possible, helping you launch faster without unnecessary complexity.',
+    title: 'Keep it practical',
+    body: 'We use proven, ready-made solutions where they fit, so you can launch sooner without unnecessary complexity.',
   },
   {
-    title: 'Make digital effortless',
-    body: 'From setup to ongoing support, we simplify the technical side so you can focus on running your business.',
+    title: 'Make it manageable',
+    body: 'We take care of the technical side and explain your options in plain language.',
   },
   {
-    title: 'Grow with you',
-    body: "Your needs will evolve. We're here to support, improve, and expand your digital capabilities as your business grows.",
+    title: 'Think ahead',
+    body: 'We recommend what fits today, with room to add more as your needs change.',
   },
 ]
 
@@ -46,13 +46,12 @@ export default function About() {
           </div>
           <div className="grid gap-6 border-t border-line pt-10 lg:grid-cols-2 lg:gap-16">
             <p className="max-w-[28ch] text-statement font-display text-fg">
-              We believe getting online and growing your business shouldn't be complicated.
+              Going digital shouldn't be complicated.
             </p>
             <div className="flex flex-col gap-4 text-body-lg text-muted">
               <p>
-                With over a decade of experience in design and digital development, we help businesses find the right solutions, get everything set up, and make the most of technology without the unnecessary hassle.
+                With over a decade of experience in design and digital development, we help businesses choose the right tools, set them up, and keep them running.
               </p>
-              <p>Whether you're starting out or ready to grow, we're here to make digital work for you.</p>
             </div>
           </div>
         </Container>
@@ -69,11 +68,10 @@ export default function About() {
           <div className="flex max-w-[62ch] flex-col gap-5 text-body-lg text-muted lg:pt-11">
             <p>Forcefield Design began as a creative design studio, building websites, applications, and brand experiences for businesses.</p>
             <p>
-              Over the years, we realised something important: businesses don't always need complicated, custom-built solutions. They need practical tools that solve real problems, work reliably, and grow with them.
+              Along the way, we saw that most businesses don't need complex, custom-built systems. They need practical tools that work reliably and grow with them.
             </p>
-            <p>That's why we've evolved beyond traditional design services.</p>
             <p>
-              Today, we combine ready-made digital solutions, thoughtful design, and dedicated support to help businesses establish their online presence, simplify everyday operations, and create opportunities for growth.
+              Today, we pair thoughtful design with ready-made digital solutions and ongoing support, helping businesses get online, simplify daily work, and grow.
             </p>
             <p className="mt-2 border-l-2 border-electric pl-5 text-lead text-fg">
               You focus on your business. We'll take care of the digital side.
@@ -88,7 +86,7 @@ export default function About() {
           <Eyebrow>What we do</Eyebrow>
           <h2 id="what-title" className="text-h2 font-normal">The right solution, at every stage.</h2>
           <p className="text-lead text-muted">
-            Every business is at a different stage. Explore how we can help you find the right direction, get online, and grow with confidence.
+            Three solutions for different needs. Start with whichever fits your business today; there's no set order.
           </p>
         </div>
         <ServiceJourney />
@@ -127,9 +125,8 @@ export default function About() {
             </div>
             <div className="flex flex-col gap-4 text-body-lg text-muted lg:pt-11">
               <p>
-                We believe going digital should be simple. That's why we take the time to understand your needs, recommend practical solutions, and make technology work for your business.
+                We recommend only what your business needs, explain your options clearly, and stay on hand with dependable support.
               </p>
-              <p>Whether you're just getting started or ready to grow, we're here to make every step easier.</p>
               <ButtonLink to="/get-started" size="lg" className="mt-4 w-full sm:w-fit">
                 Get Started <ArrowRight className="size-4" aria-hidden="true" />
               </ButtonLink>
