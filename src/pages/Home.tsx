@@ -27,8 +27,7 @@ function Hero() {
             Digital solutions <span className="text-gradient">for every stage of business.</span>
           </h1>
           <p className="max-w-[40rem] text-lead text-muted">
-            <span className="text-fg">Professional websites, practical business tools, and ongoing support.</span>{' '}
-            Whether you're getting online for the first time or ready to do more, we'll help you choose what fits.
+            Professional websites, practical business tools, and ongoing support. Whether you're getting online for the first time or ready to do more, we'll help you choose what fits.
           </p>
           <div className="flex flex-col gap-3 xs:flex-row">
             <ButtonLink to="/solutions" size="lg">Explore Our Solutions</ButtonLink>

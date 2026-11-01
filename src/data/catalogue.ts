@@ -700,6 +700,7 @@ export const OFFERINGS: Offering[] = [
       'Industry-specific preset design',
       'Easy-to-use admin panel',
       'AI-powered SEO tools',
+      'On-demand features',
       'Domain, hosting & maintenance included',
       'Smart integrations & dedicated support',
     ],
